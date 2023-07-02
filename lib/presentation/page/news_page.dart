@@ -408,6 +408,7 @@ class _NewsPageState extends State<NewsPage> {
               dropdownValue = newValue!;
               selectedNameIndex =
                   snapshot.data!.indexWhere((value) => value.name == newValue);
+              selectedPahsIndex = 0;
             });
           },
           items: snapshot.data!
@@ -469,7 +470,9 @@ class _NewsPageState extends State<NewsPage> {
                       .data![selectedNameIndex].paths![selectedPahsIndex].path!
                       .split("/");
                   newCategory = pathParts[pathParts.length - 2];
-                });
+                    print(selectedNameIndex);
+                  },
+                );
               },
             ),
           ),

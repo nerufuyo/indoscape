@@ -48,8 +48,8 @@ List flostingMenuContentColor = [
   const Color(0xFF769AE4),
 ];
 
-Map<String, List<IconData>> categoryIcons = {
-  'newsAntara': [
+Map<int, List<IconData>> categoryIcons = {
+  1: [
     FontAwesomeIcons.fire,
     FontAwesomeIcons.scaleBalanced,
     FontAwesomeIcons.gavel,
@@ -63,7 +63,7 @@ Map<String, List<IconData>> categoryIcons = {
     FontAwesomeIcons.microchip,
     FontAwesomeIcons.car,
   ],
-  'newsCnbc': [
+  2: [
     FontAwesomeIcons.fire,
     FontAwesomeIcons.dollarSign,
     FontAwesomeIcons.newspaper,
@@ -75,7 +75,7 @@ Map<String, List<IconData>> categoryIcons = {
     FontAwesomeIcons.globeAsia,
     FontAwesomeIcons.handsBubbles,
   ],
-  'newsCnn': [
+  3: [
     FontAwesomeIcons.fire,
     FontAwesomeIcons.flag,
     FontAwesomeIcons.globe,
@@ -85,9 +85,9 @@ Map<String, List<IconData>> categoryIcons = {
     FontAwesomeIcons.baseball,
     FontAwesomeIcons.glassCheers,
   ],
-  'newsJpnn': [FontAwesomeIcons.fire],
-  'newsKumparan': [FontAwesomeIcons.fire],
-  'newsMerdeka': [
+  4: [FontAwesomeIcons.fire],
+  5: [FontAwesomeIcons.fire],
+  6: [
     FontAwesomeIcons.fire,
     FontAwesomeIcons.city,
     FontAwesomeIcons.globe,
@@ -99,7 +99,7 @@ Map<String, List<IconData>> categoryIcons = {
     FontAwesomeIcons.heartPulse,
     FontAwesomeIcons.mountainCity,
   ],
-  'newsOkezone': [
+  7: [
     FontAwesomeIcons.fire,
     FontAwesomeIcons.artstation,
     FontAwesomeIcons.running,
@@ -109,7 +109,7 @@ Map<String, List<IconData>> categoryIcons = {
     FontAwesomeIcons.tshirt,
     FontAwesomeIcons.soccerBall,
   ],
-  'newsRepublika': [
+  8: [
     FontAwesomeIcons.fire,
     FontAwesomeIcons.newspaper,
     FontAwesomeIcons.placeOfWorship,
@@ -119,7 +119,7 @@ Map<String, List<IconData>> categoryIcons = {
     FontAwesomeIcons.soccerBall,
     FontAwesomeIcons.plane,
   ],
-  'newsSindo': [
+  9: [
     FontAwesomeIcons.fire,
     FontAwesomeIcons.flag,
     FontAwesomeIcons.city,
@@ -134,7 +134,7 @@ Map<String, List<IconData>> categoryIcons = {
     FontAwesomeIcons.tshirt,
     FontAwesomeIcons.gauge,
   ],
-  'newsSuara': [
+  10: [
     FontAwesomeIcons.fire,
     FontAwesomeIcons.moneyBillTransfer,
     FontAwesomeIcons.soccerBall,
@@ -144,7 +144,7 @@ Map<String, List<IconData>> categoryIcons = {
     FontAwesomeIcons.microchip,
     FontAwesomeIcons.heartPulse,
   ],
-  'newsTempo': [
+  11: [
     FontAwesomeIcons.flag,
     FontAwesomeIcons.moneyBillTransfer,
     FontAwesomeIcons.city,
@@ -161,7 +161,7 @@ Map<String, List<IconData>> categoryIcons = {
     FontAwesomeIcons.info,
     FontAwesomeIcons.cakeCandles,
   ],
-  'newsTribun': [
+  12: [
     FontAwesomeIcons.fire,
     FontAwesomeIcons.moneyBillTransfer,
     FontAwesomeIcons.baseballBatBall,
