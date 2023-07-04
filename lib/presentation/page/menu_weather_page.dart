@@ -5,8 +5,6 @@ import 'package:indoscape/common/color.dart';
 import 'package:indoscape/common/constant.dart';
 import 'package:indoscape/common/gap.dart';
 import 'package:indoscape/common/typography.dart';
-import 'package:indoscape/data/models/weather_hour_model.dart';
-import 'package:indoscape/data/models/weather_model.dart';
 import 'package:indoscape/data/repositories/repository.dart';
 import 'package:indoscape/domain/usecase/get_location.dart';
 import 'package:intl/intl.dart';

@@ -44,6 +44,8 @@ dependencies:
   skeletons: ^0.0.3
   http: ^1.1.0
   carousel_slider: ^4.2.1
+  flutter_map: ^5.0.0
+  latlong2: ^0.9.0
 
 dev_dependencies:
   flutter_test:
