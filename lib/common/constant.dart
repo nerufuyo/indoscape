@@ -3,6 +3,15 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:indoscape/presentation/page/menu_about_page.dart';
+import 'package:indoscape/presentation/page/menu_weather_page.dart';
+
+double kelvinToCelsius(double kelvin) {
+  return kelvin - 273.15;
+}
+
+double metersToKilometers(double meters) {
+  return meters / 1000;
+}
 
 List floatingMenuContentText = [
   'About',
@@ -11,7 +20,7 @@ List floatingMenuContentText = [
   'Travel',
   'Museum',
   'City',
-  'Province',
+  'Weather',
   'Food Drink',
 ];
 
@@ -33,7 +42,7 @@ List floatingMenuContentRoute = [
   MenuAboutPage.routeName,
   MenuAboutPage.routeName,
   MenuAboutPage.routeName,
-  MenuAboutPage.routeName,
+  MenuWeatherPage.routeName,
   MenuAboutPage.routeName,
 ];
 
@@ -176,3 +185,5 @@ Map<int, List<IconData>> categoryIcons = {
     FontAwesomeIcons.heartPulse,
   ],
 };
+
+final List<String> desiredTimes = ['06:00', '12:00', '18:00'];

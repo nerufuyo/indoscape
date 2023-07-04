@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:indoscape/common/color.dart';
+import 'package:indoscape/presentation/page/discovery_page.dart';
 import 'package:indoscape/presentation/page/home_page.dart';
 import 'package:indoscape/presentation/page/news_page.dart';
 
@@ -17,7 +18,7 @@ class _NavigationWidgetState extends State<NavigationWidget> {
   int selectedIndex = 0;
   List pages = const [
     HomePage(),
-    Text('Menu'),
+    ExplorePage(),
     NewsPage(),
     Text('Profile'),
   ];
@@ -47,6 +48,7 @@ class _NavigationWidgetState extends State<NavigationWidget> {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             duration: const Duration(milliseconds: 400),
             tabBackgroundColor: primaryColor,
+            tabBorderRadius: 24,
             activeColor: backgroundColor,
             rippleColor: secondaryColor,
             hoverColor: tertiaryColor,
@@ -58,7 +60,7 @@ class _NavigationWidgetState extends State<NavigationWidget> {
               ),
               GButton(
                 icon: FontAwesomeIcons.box,
-                text: 'Menu',
+                text: 'Explore',
               ),
               GButton(
                 icon: FontAwesomeIcons.newspaper,
