@@ -41,368 +41,328 @@ class _MenuAboutPageState extends State<MenuAboutPage> {
                     ),
                   ),
                 ),
-                DraggableScrollableSheet(
-                  initialChildSize: .65,
-                  minChildSize: .25,
-                  maxChildSize: 1,
-                  builder: (context, scrollController) {
-                    return SingleChildScrollView(
-                      child: Container(
+                Positioned(
+                  bottom: 16,
+                  left: 16,
+                  right: 16,
+                  child: Column(
+                    children: [
+                      Container(
                         width: MediaQuery.of(context).size.width,
-                        decoration: const BoxDecoration(
-                          color: backgroundColor,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(24),
-                            topRight: Radius.circular(24),
-                          ),
+                        height: MediaQuery.of(context).size.height / 10,
+                        decoration: BoxDecoration(
+                          color: backgroundColor.withOpacity(.75),
+                          borderRadius: BorderRadius.circular(16),
                         ),
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                        padding: const EdgeInsets.all(16),
+                        child: ListView.builder(
+                          padding: EdgeInsets.zero,
+                          shrinkWrap: true,
+                          itemCount: data.length,
+                          itemBuilder: (context, index) {
+                            return Column(
                               children: [
-                                Container(
-                                  margin: const EdgeInsets.only(top: 8),
-                                  width: 64,
-                                  height: 8,
-                                  decoration: BoxDecoration(
-                                    color: textColor.withOpacity(.35),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      data[index].name!.official.toString(),
+                                      style: jakartaH3.copyWith(
+                                        color: textColor,
+                                      ),
+                                    ),
+                                    const HorizontalGap5(),
+                                    Container(
+                                      color: primaryColor,
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 4,
+                                      ),
+                                      child: Text(
+                                        data[index].cca2.toString(),
+                                        style: jakartaH4.copyWith(
+                                          color: backgroundColor,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const VerticalGap5(),
+                                Row(
+                                  children: [
+                                    const Icon(
+                                      FontAwesomeIcons.mapMarkerAlt,
+                                      color: primaryColor,
+                                      size: 16,
+                                    ),
+                                    const HorizontalGap5(),
+                                    Text(
+                                      data[index].capital![index].toString(),
+                                      style: jakartaH4.copyWith(
+                                        color: textColor,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
-                            ),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width,
-                              height: MediaQuery.of(context).size.height,
-                              child: ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: data.length,
-                                itemBuilder: (context, index) {
-                                  return Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            data[index]
-                                                .name!
-                                                .official
-                                                .toString(),
-                                            style: jakartaH3.copyWith(
-                                              color: textColor,
+                            );
+                          },
+                        ),
+                      ),
+                      const VerticalGap10(),
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height / 1.9,
+                        decoration: BoxDecoration(
+                          color: backgroundColor.withOpacity(.75),
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        padding: const EdgeInsets.all(16),
+                        child: ListView.builder(
+                          padding: EdgeInsets.zero,
+                          shrinkWrap: true,
+                          itemCount: data.length,
+                          itemBuilder: (context, index) {
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Table(
+                                  columnWidths: const {
+                                    0: FlexColumnWidth(1),
+                                    1: FlexColumnWidth(2),
+                                  },
+                                  children: [
+                                    TableRow(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 2,
+                                          ),
+                                          child: Text(
+                                            'Currency',
+                                            style: jakartaH4.copyWith(
+                                              color: textColor.withOpacity(.75),
                                             ),
                                           ),
-                                          const HorizontalGap5(),
-                                          Container(
-                                            color: primaryColor,
-                                            padding: const EdgeInsets.symmetric(
-                                              horizontal: 4,
-                                            ),
-                                            child: Text(
-                                              data[index].cca2.toString(),
-                                              style: jakartaH4.copyWith(
-                                                color: backgroundColor,
-                                              ),
-                                            ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 2,
                                           ),
-                                        ],
-                                      ),
-                                      const VerticalGap5(),
-                                      Row(
-                                        children: [
-                                          const Icon(
-                                            FontAwesomeIcons.mapMarkerAlt,
-                                            color: primaryColor,
-                                            size: 16,
-                                          ),
-                                          const HorizontalGap5(),
-                                          Text(
-                                            data[index]
-                                                .capital![index]
-                                                .toString(),
+                                          child: Text(
+                                            '${data[index].currencies!.idr!.name} (${data[index].currencies!.idr!.symbol})',
                                             style: jakartaH4.copyWith(
                                               color: textColor,
                                             ),
                                           ),
-                                        ],
-                                      ),
-                                      const VerticalGap5(),
-                                      Divider(
-                                        color: textColor.withOpacity(.25),
-                                        thickness: 2,
-                                      ),
-                                      const VerticalGap5(),
-                                      Table(
-                                        columnWidths: const {
-                                          0: FlexColumnWidth(1),
-                                          1: FlexColumnWidth(2),
-                                        },
-                                        children: [
-                                          TableRow(
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                  vertical: 2,
-                                                ),
-                                                child: Text(
-                                                  'Currency',
-                                                  style: jakartaH4.copyWith(
-                                                    color: textColor
-                                                        .withOpacity(.75),
-                                                  ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                  vertical: 2,
-                                                ),
-                                                child: Text(
-                                                  '${data[index].currencies!.idr!.name} (${data[index].currencies!.idr!.symbol})',
-                                                  style: jakartaH4.copyWith(
-                                                    color: textColor,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
+                                        ),
+                                      ],
+                                    ),
+                                    TableRow(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 2,
                                           ),
-                                          TableRow(
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                  vertical: 2,
-                                                ),
-                                                child: Text(
-                                                  'Region',
-                                                  style: jakartaH4.copyWith(
-                                                    color: textColor
-                                                        .withOpacity(.75),
-                                                  ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                  vertical: 2,
-                                                ),
-                                                child: Text(
-                                                  '${data[index].region} (${data[index].subregion})',
-                                                  style: jakartaH4.copyWith(
-                                                    color: textColor,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          TableRow(
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                  vertical: 2,
-                                                ),
-                                                child: Text(
-                                                  'Language',
-                                                  style: jakartaH4.copyWith(
-                                                    color: textColor
-                                                        .withOpacity(.75),
-                                                  ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                  vertical: 2,
-                                                ),
-                                                child: Text(
-                                                  '${data[index].languages!.ind}',
-                                                  style: jakartaH4.copyWith(
-                                                    color: textColor,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          TableRow(
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                  vertical: 2,
-                                                ),
-                                                child: Text(
-                                                  'Phone Code',
-                                                  style: jakartaH4.copyWith(
-                                                    color: textColor
-                                                        .withOpacity(.75),
-                                                  ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                  vertical: 2,
-                                                ),
-                                                child: Text(
-                                                  '${data[index].idd!.root}${data[index].idd!.suffixes![0]}',
-                                                  style: jakartaH4.copyWith(
-                                                    color: textColor,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          TableRow(
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                  vertical: 2,
-                                                ),
-                                                child: Text(
-                                                  'Population',
-                                                  style: jakartaH4.copyWith(
-                                                    color: textColor
-                                                        .withOpacity(.75),
-                                                  ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                  vertical: 2,
-                                                ),
-                                                child: Text(
-                                                  '${data[index].population}',
-                                                  style: jakartaH4.copyWith(
-                                                    color: textColor,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          TableRow(
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                  vertical: 2,
-                                                ),
-                                                child: Text(
-                                                  'Lat Lng',
-                                                  style: jakartaH4.copyWith(
-                                                    color: textColor
-                                                        .withOpacity(.75),
-                                                  ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                  vertical: 2,
-                                                ),
-                                                child: Text(
-                                                  '${data[index].latlng![0]}, ${data[index].latlng![1]}',
-                                                  style: jakartaH4.copyWith(
-                                                    color: textColor,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          TableRow(
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                  vertical: 2,
-                                                ),
-                                                child: Text(
-                                                  'Borders',
-                                                  style: jakartaH4.copyWith(
-                                                    color: textColor
-                                                        .withOpacity(.75),
-                                                  ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                  vertical: 2,
-                                                ),
-                                                child: Text(
-                                                  '${data[index].borders![0]}, ${data[index].borders![1]}, ${data[index].borders![2]}',
-                                                  style: jakartaH4.copyWith(
-                                                    color: textColor,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          TableRow(
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                  vertical: 2,
-                                                ),
-                                                child: Text(
-                                                  'Timezone',
-                                                  style: jakartaH4.copyWith(
-                                                    color: textColor
-                                                        .withOpacity(.75),
-                                                  ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                  vertical: 2,
-                                                ),
-                                                child: Text(
-                                                  '${data[index].timezones![0]}, ${data[index].timezones![1]}, ${data[index].timezones![2]}',
-                                                  style: jakartaH4.copyWith(
-                                                    color: textColor,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                      const VerticalGap10(),
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        height: 200,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(16),
-                                          image: const DecorationImage(
-                                            image: AssetImage(
-                                              'lib/assets/images/indonesiaMap.jpg',
+                                          child: Text(
+                                            'Region',
+                                            style: jakartaH4.copyWith(
+                                              color: textColor.withOpacity(.75),
                                             ),
-                                            fit: BoxFit.cover,
                                           ),
                                         ),
-                                      )
-                                    ],
-                                  );
-                                },
-                              ),
-                            ),
-                          ],
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 2,
+                                          ),
+                                          child: Text(
+                                            '${data[index].region} (${data[index].subregion})',
+                                            style: jakartaH4.copyWith(
+                                              color: textColor,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    TableRow(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 2,
+                                          ),
+                                          child: Text(
+                                            'Language',
+                                            style: jakartaH4.copyWith(
+                                              color: textColor.withOpacity(.75),
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 2,
+                                          ),
+                                          child: Text(
+                                            '${data[index].languages!.ind}',
+                                            style: jakartaH4.copyWith(
+                                              color: textColor,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    TableRow(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 2,
+                                          ),
+                                          child: Text(
+                                            'Phone Code',
+                                            style: jakartaH4.copyWith(
+                                              color: textColor.withOpacity(.75),
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 2,
+                                          ),
+                                          child: Text(
+                                            '${data[index].idd!.root}${data[index].idd!.suffixes![0]}',
+                                            style: jakartaH4.copyWith(
+                                              color: textColor,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    TableRow(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 2,
+                                          ),
+                                          child: Text(
+                                            'Population',
+                                            style: jakartaH4.copyWith(
+                                              color: textColor.withOpacity(.75),
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 2,
+                                          ),
+                                          child: Text(
+                                            '${data[index].population}',
+                                            style: jakartaH4.copyWith(
+                                              color: textColor,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    TableRow(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 2,
+                                          ),
+                                          child: Text(
+                                            'Lat Lng',
+                                            style: jakartaH4.copyWith(
+                                              color: textColor.withOpacity(.75),
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 2,
+                                          ),
+                                          child: Text(
+                                            '${data[index].latlng![0]}, ${data[index].latlng![1]}',
+                                            style: jakartaH4.copyWith(
+                                              color: textColor,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    TableRow(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 2,
+                                          ),
+                                          child: Text(
+                                            'Borders',
+                                            style: jakartaH4.copyWith(
+                                              color: textColor.withOpacity(.75),
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 2,
+                                          ),
+                                          child: Text(
+                                            '${data[index].borders![0]}, ${data[index].borders![1]}, ${data[index].borders![2]}',
+                                            style: jakartaH4.copyWith(
+                                              color: textColor,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    TableRow(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 2,
+                                          ),
+                                          child: Text(
+                                            'Timezone',
+                                            style: jakartaH4.copyWith(
+                                              color: textColor.withOpacity(.75),
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 2,
+                                          ),
+                                          child: Text(
+                                            '${data[index].timezones![0]}, ${data[index].timezones![1]}, ${data[index].timezones![2]}',
+                                            style: jakartaH4.copyWith(
+                                              color: textColor,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                const VerticalGap10(),
+                                Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  height: 200,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(16),
+                                    image: const DecorationImage(
+                                      image: AssetImage(
+                                        'lib/assets/images/indonesiaMap.jpg',
+                                      ),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            );
+                          },
                         ),
                       ),
-                    );
-                  },
+                    ],
+                  ),
                 ),
                 Positioned(
                   top: 48,
