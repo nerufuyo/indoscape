@@ -2,7 +2,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:indoscape/common/color.dart';
 import 'package:indoscape/common/gap.dart';
 import 'package:indoscape/common/typography.dart';
@@ -171,11 +170,12 @@ class _NewsPageState extends State<NewsPage> {
               skeleton: const ShimmerCurrentlyNewsList(),
               child: ListView.separated(
                 separatorBuilder: (context, index) => const VerticalGap10(),
-                itemCount: data.posts!.length,
+                itemCount: data.posts!.length - 6,
                 itemBuilder: (context, index) {
+                  final adjustedIndex = index + 6;
                   final dateFormatted = DateFormat('dd MMMM yyyy').format(
                     DateTime.parse(
-                      data.posts![index].pubDate!.toString(),
+                      data.posts![adjustedIndex].pubDate!.toString(),
                     ),
                   );
                   return Container(
@@ -199,7 +199,7 @@ class _NewsPageState extends State<NewsPage> {
                             borderRadius: BorderRadius.circular(16),
                             image: DecorationImage(
                               image: NetworkImage(
-                                data.posts![index].thumbnail!,
+                                data.posts![adjustedIndex].thumbnail!,
                               ),
                               fit: BoxFit.cover,
                             ),
@@ -235,7 +235,7 @@ class _NewsPageState extends State<NewsPage> {
                                 ),
                                 const VerticalGap10(),
                                 Text(
-                                  data.posts![index].title!,
+                                  data.posts![adjustedIndex].title!,
                                   style: jakartaH5,
                                   maxLines: 3,
                                   overflow: TextOverflow.ellipsis,
@@ -408,6 +408,7 @@ class _NewsPageState extends State<NewsPage> {
               dropdownValue = newValue!;
               selectedNameIndex =
                   snapshot.data!.indexWhere((value) => value.name == newValue);
+              selectedPahsIndex = 0;
             });
           },
           items: snapshot.data!
@@ -438,39 +439,49 @@ class _NewsPageState extends State<NewsPage> {
             themeMode: ThemeMode.light,
             shimmerGradient: _shimmerGradientCustom(),
             skeleton: const ShimmerNewsCategory(),
-            child: GNav(
-              gap: 4,
-              iconSize: 20,
-              padding: const EdgeInsets.all(12),
-              tabMargin: const EdgeInsets.symmetric(horizontal: 4),
-              duration: const Duration(milliseconds: 400),
-              tabBackgroundColor: primaryColor,
-              activeColor: backgroundColor,
-              rippleColor: secondaryColor,
-              hoverColor: tertiaryColor,
-              color: textColor.withOpacity(.5),
-              tabs: snapshot.data![selectedNameIndex].paths!
-                  .map<GButton>(
-                    (path) => GButton(
-                      icon: FontAwesomeIcons.newspaper,
-                      text: path.name!.substring(0, 1).toUpperCase() +
-                          path.name!.substring(1, path.name!.length),
-                      textStyle: jakartaButton.copyWith(
-                        color: backgroundColor,
+            child: Row(
+              children: snapshot.data![selectedNameIndex].paths!.map<Widget>(
+                (path) {
+                  return InkWell(
+                    onTap: () {
+                      setState(() {
+                        selectedPahsIndex = snapshot
+                            .data![selectedNameIndex].paths!
+                            .indexWhere((value) => value.name == path.name);
+                        List pathParts = snapshot.data![selectedNameIndex]
+                            .paths![selectedPahsIndex].path!
+                            .split("/");
+                        newCategory = pathParts[pathParts.length - 2];
+                      });
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      margin: const EdgeInsets.only(right: 4),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: selectedPahsIndex ==
+                                snapshot.data![selectedNameIndex].paths!
+                                    .indexWhere(
+                                        (value) => value.name == path.name)
+                            ? primaryColor
+                            : backgroundColor,
+                      ),
+                      child: Text(
+                        path.name!.substring(0, 1).toUpperCase() +
+                            path.name!.substring(1, path.name!.length),
+                        style: jakartaButton.copyWith(
+                          color: selectedPahsIndex ==
+                                  snapshot.data![selectedNameIndex].paths!
+                                      .indexWhere(
+                                          (value) => value.name == path.name)
+                              ? backgroundColor
+                              : textColor,
+                        ),
                       ),
                     ),
-                  )
-                  .toList(),
-              selectedIndex: selectedPahsIndex,
-              onTabChange: (index) {
-                setState(() {
-                  selectedPahsIndex = index;
-                  List pathParts = snapshot
-                      .data![selectedNameIndex].paths![selectedPahsIndex].path!
-                      .split("/");
-                  newCategory = pathParts[pathParts.length - 2];
-                });
-              },
+                  );
+                },
+              ).toList(),
             ),
           ),
         ),
