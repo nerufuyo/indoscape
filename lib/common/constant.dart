@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:indoscape/presentation/page/menu_about_page.dart';
+import 'package:indoscape/presentation/page/menu_movie_page.dart';
 import 'package:indoscape/presentation/page/menu_weather_page.dart';
 
 double kelvinToCelsius(double kelvin) {
@@ -18,7 +19,7 @@ List floatingMenuContentText = [
   'Mountain',
   'Culture',
   'Travel',
-  'Museum',
+  'Movie',
   'City',
   'Weather',
   'Food Drink',
@@ -29,7 +30,7 @@ List flostingMenuContentIcon = [
   'lib/assets/images/mountain.png',
   'lib/assets/images/culture.png',
   'lib/assets/images/travel.png',
-  'lib/assets/images/museum.png',
+  'lib/assets/images/film.png',
   'lib/assets/images/city.png',
   'lib/assets/images/province.png',
   'lib/assets/images/food.png',
@@ -40,7 +41,7 @@ List floatingMenuContentRoute = [
   MenuAboutPage.routeName,
   MenuAboutPage.routeName,
   MenuAboutPage.routeName,
-  MenuAboutPage.routeName,
+  MenuMoviePage.routeName,
   MenuAboutPage.routeName,
   MenuWeatherPage.routeName,
   MenuAboutPage.routeName,
@@ -51,7 +52,7 @@ List flostingMenuContentColor = [
   const Color(0xFF15181A),
   const Color(0xFFE8B647),
   const Color(0xFF1EDEEF),
-  const Color(0xFFC75555),
+  const Color(0xFF357FEF),
   const Color(0xFFDEBE79),
   const Color(0xFF95DF8D),
   const Color(0xFF769AE4),

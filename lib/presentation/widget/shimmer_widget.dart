@@ -230,3 +230,107 @@ class ShimmerCurrentlyNewsList extends StatelessWidget {
     );
   }
 }
+
+class ShimmerDiscoveryTopWidget extends StatelessWidget {
+  const ShimmerDiscoveryTopWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width / 2.225,
+      height: MediaQuery.of(context).size.height / 11,
+      decoration: BoxDecoration(
+        color: tertiaryColor.withOpacity(.25),
+        borderRadius: BorderRadius.circular(16),
+      ),
+    );
+  }
+}
+
+class ShimmerDiscoveryEarthquakeWidget extends StatelessWidget {
+  const ShimmerDiscoveryEarthquakeWidget({
+    super.key,
+    required this.context,
+  });
+
+  final BuildContext context;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height / 2.5,
+      decoration: BoxDecoration(
+        color: tertiaryColor.withOpacity(0.25),
+        borderRadius: BorderRadius.circular(16),
+      ),
+    );
+  }
+}
+
+class ShimmerMoviesCarouselLists extends StatelessWidget {
+  const ShimmerMoviesCarouselLists({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height / 1.75,
+      decoration: BoxDecoration(
+        color: tertiaryColor.withOpacity(.25),
+      ),
+    );
+  }
+}
+
+class ShimmerMoviesListView extends StatelessWidget {
+  const ShimmerMoviesListView({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        scrollDirection: Axis.horizontal,
+        separatorBuilder: (context, index) => const HorizontalGap10(),
+        itemCount: 10,
+        itemBuilder: (context, index) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width / 3,
+                height: MediaQuery.of(context).size.height / 5,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: tertiaryColor.withOpacity(.25),
+                ),
+              ),
+              const VerticalGap10(),
+              Container(
+                width: MediaQuery.of(context).size.width / 3.5,
+                height: 16,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4),
+                  color: tertiaryColor.withOpacity(.25),
+                ),
+              ),
+              const VerticalGap5(),
+              Container(
+                width: MediaQuery.of(context).size.width / 5,
+                height: 16,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4),
+                  color: tertiaryColor.withOpacity(.25),
+                ),
+              ),
+            ],
+          );
+        });
+  }
+}

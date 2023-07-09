@@ -1,9 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
-import 'package:indoscape/common/private.dart';
 import 'package:indoscape/data/models/country_model.dart';
+import 'package:indoscape/data/models/movie_model.dart';
 import 'package:indoscape/data/models/news_model.dart';
 import 'package:indoscape/data/models/news_station_model.dart';
 import 'package:indoscape/data/models/quake_model.dart';
@@ -11,9 +12,12 @@ import 'package:indoscape/data/models/weather_hour_model.dart';
 import 'package:indoscape/data/models/weather_model.dart';
 
 class Repository {
+  final weatherApiKey = dotenv.env['WEATHER_API_KEY'];
+  final movieApiKey = dotenv.env['MOVIE_API_KEY'];
   final newsBaseUrl = 'https://api-berita-indonesia.vercel.app/';
   final quakeBaseUrl = 'https://cuaca-gempa-rest-api.vercel.app/';
   final weatherBaseUrl = 'api.openweathermap.org';
+  final movieBaseUrl = 'api.themoviedb.org';
 
   Future<List<Country>> getCountryInformation() async {
     final response = await http
@@ -95,7 +99,7 @@ class Repository {
     Map<String, String> parameters = {
       'lat': lat,
       'lon': lon,
-      'appid': weatherApiKey,
+      'appid': weatherApiKey.toString(),
     };
     Uri uri = Uri.https(weatherBaseUrl, '/data/2.5/weather', parameters);
 
@@ -120,7 +124,7 @@ class Repository {
     Map<String, String> parameters = {
       'lat': lat,
       'lon': lon,
-      'appid': weatherApiKey,
+      'appid': weatherApiKey.toString(),
     };
     Uri uri = Uri.https(weatherBaseUrl, '/data/2.5/forecast', parameters);
 
@@ -132,6 +136,110 @@ class Repository {
         return WeatherHourModel.fromJson(data);
       } else {
         throw Exception('Failed to load weather information');
+      }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<MovieModel> getNowPlayingMovies(int page) async {
+    Map<String, String> header = {
+      HttpHeaders.contentTypeHeader: 'application/json',
+    };
+    Map<String, String> parameters = {
+      'page': page.toString(),
+      'region': 'ID',
+      'api_key': movieApiKey.toString(),
+    };
+
+    final response = await http.get(
+        Uri.https(movieBaseUrl, '/3/movie/now_playing', parameters),
+        headers: header);
+
+    try {
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        return MovieModel.fromJson(data);
+      } else {
+        throw Exception('Failed to load movie list');
+      }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<MovieModel> getPopularMovies(int page) async {
+    Map<String, String> header = {
+      HttpHeaders.contentTypeHeader: 'application/json',
+    };
+    Map<String, String> parameters = {
+      'page': page.toString(),
+      'region': 'ID',
+      'api_key': movieApiKey.toString(),
+    };
+
+    final response = await http.get(
+        Uri.https(movieBaseUrl, '/3/movie/popular', parameters),
+        headers: header);
+
+    try {
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        return MovieModel.fromJson(data);
+      } else {
+        throw Exception('Failed to load movie list');
+      }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<MovieModel> getTopRatedMovies(int page) async {
+    Map<String, String> header = {
+      HttpHeaders.contentTypeHeader: 'application/json',
+    };
+    Map<String, String> parameters = {
+      'page': page.toString(),
+      'region': 'ID',
+      'api_key': movieApiKey.toString(),
+    };
+
+    final response = await http.get(
+        Uri.https(movieBaseUrl, '/3/movie/top_rated', parameters),
+        headers: header);
+
+    try {
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        return MovieModel.fromJson(data);
+      } else {
+        throw Exception('Failed to load movie list');
+      }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<MovieModel> getUpcomingMovies(int page) async {
+    Map<String, String> header = {
+      HttpHeaders.contentTypeHeader: 'application/json',
+    };
+    Map<String, String> parameters = {
+      'page': page.toString(),
+      'region': 'ID',
+      'api_key': movieApiKey.toString(),
+    };
+
+    final response = await http.get(
+        Uri.https(movieBaseUrl, '/3/movie/upcoming', parameters),
+        headers: header);
+
+    try {
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        return MovieModel.fromJson(data);
+      } else {
+        throw Exception('Failed to load movie list');
       }
     } catch (e) {
       throw Exception(e.toString());

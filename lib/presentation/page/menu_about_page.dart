@@ -421,7 +421,9 @@ class _MenuAboutPageState extends State<MenuAboutPage> {
             );
           } else {
             return const Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(
+                color: primaryColor,
+              ),
             );
           }
         },
