@@ -7,6 +7,8 @@ import 'package:indoscape/common/color.dart';
 import 'package:indoscape/common/constant.dart';
 import 'package:indoscape/common/gap.dart';
 import 'package:indoscape/common/typography.dart';
+import 'package:indoscape/data/models/charades_model.dart';
+import 'package:indoscape/data/repositories/repository.dart';
 import 'package:indoscape/domain/usecase/get_location.dart';
 import 'package:indoscape/presentation/widget/shimmer_widget.dart';
 import 'package:skeletons/skeletons.dart';
@@ -81,16 +83,91 @@ class _HomePageState extends State<HomePage> {
               const VerticalGap10(),
               _tavelContent(context),
               const VerticalGap20(),
+              _charadesContent(),
+              const VerticalGap20(),
               _fooddrinksTitle(),
               const VerticalGap10(),
               _fooddrinksContent(context),
-              const VerticalGap30(),
               const VerticalGap30(),
               const VerticalGap30(),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  FutureBuilder<CharadesModel> _charadesContent() {
+    return FutureBuilder(
+      future: Repository().getCharades(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          final data = snapshot.data;
+          return Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height / 8,
+            decoration: BoxDecoration(
+              color: primaryColor,
+              border: Border.all(color: textColor.withOpacity(.25)),
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: textColor.withOpacity(.1),
+                  blurRadius: 10,
+                  spreadRadius: 2,
+                  offset: const Offset(2, 4),
+                ),
+              ],
+            ),
+            margin: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.all(8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    color: backgroundColor,
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: textColor.withOpacity(.25)),
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
+                  ),
+                  child: Text(
+                    data!.soal.toString(),
+                    style: jakartaH4,
+                  ),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    color: backgroundColor,
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: textColor.withOpacity(.25)),
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
+                  ),
+                  child: Text(
+                    data.jawaban.toString(),
+                    style: jakartaH4,
+                  ),
+                ),
+              ],
+            ),
+          );
+        } else if (snapshot.hasError) {
+          return const Text('Error');
+        } else {
+          return const Center(
+            child: CircularProgressIndicator(
+              color: primaryColor,
+            ),
+          );
+        }
+      },
     );
   }
 

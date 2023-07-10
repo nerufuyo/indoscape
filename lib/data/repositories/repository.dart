@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:indoscape/data/models/charades_model.dart';
 import 'package:indoscape/data/models/country_model.dart';
 import 'package:indoscape/data/models/detail_movie_model.dart';
 import 'package:indoscape/data/models/movie_model.dart';
@@ -17,6 +18,7 @@ class Repository {
   final movieApiKey = dotenv.env['MOVIE_API_KEY'];
   final newsBaseUrl = 'https://api-berita-indonesia.vercel.app/';
   final quakeBaseUrl = 'https://cuaca-gempa-rest-api.vercel.app/';
+  final charadesBaseUrl = 'https://api.akuari.my.id/games/tebakkata';
   final weatherBaseUrl = 'api.openweathermap.org';
   final movieBaseUrl = 'api.themoviedb.org';
 
@@ -270,6 +272,20 @@ class Repository {
         return DetailMovieModel.fromJson(data);
       } else {
         throw Exception('Failed to load movie list');
+      }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<CharadesModel> getCharades() async {
+    final response = await http.get(Uri.parse(charadesBaseUrl));
+    try {
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        return CharadesModel.fromJson(data['hasil']);
+      } else {
+        throw Exception('Failed to load charades list');
       }
     } catch (e) {
       throw Exception(e.toString());
