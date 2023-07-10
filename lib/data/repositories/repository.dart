@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:indoscape/data/models/country_model.dart';
+import 'package:indoscape/data/models/detail_movie_model.dart';
 import 'package:indoscape/data/models/movie_model.dart';
 import 'package:indoscape/data/models/news_model.dart';
 import 'package:indoscape/data/models/news_station_model.dart';
@@ -154,7 +155,8 @@ class Repository {
 
     final response = await http.get(
         Uri.https(movieBaseUrl, '/3/movie/now_playing', parameters),
-        headers: header);
+      headers: header,
+    );
 
     try {
       if (response.statusCode == 200) {
@@ -180,7 +182,8 @@ class Repository {
 
     final response = await http.get(
         Uri.https(movieBaseUrl, '/3/movie/popular', parameters),
-        headers: header);
+      headers: header,
+    );
 
     try {
       if (response.statusCode == 200) {
@@ -206,7 +209,8 @@ class Repository {
 
     final response = await http.get(
         Uri.https(movieBaseUrl, '/3/movie/top_rated', parameters),
-        headers: header);
+      headers: header,
+    );
 
     try {
       if (response.statusCode == 200) {
@@ -232,12 +236,38 @@ class Repository {
 
     final response = await http.get(
         Uri.https(movieBaseUrl, '/3/movie/upcoming', parameters),
-        headers: header);
+      headers: header,
+    );
 
     try {
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
         return MovieModel.fromJson(data);
+      } else {
+        throw Exception('Failed to load movie list');
+      }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<DetailMovieModel> getMovieById(int id) async {
+    Map<String, String> header = {
+      HttpHeaders.contentTypeHeader: 'application/json',
+    };
+    Map<String, String> parameters = {
+      'api_key': movieApiKey.toString(),
+    };
+
+    final response = await http.get(
+      Uri.https(movieBaseUrl, '/3/movie/$id', parameters),
+      headers: header,
+    );
+
+    try {
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        return DetailMovieModel.fromJson(data);
       } else {
         throw Exception('Failed to load movie list');
       }

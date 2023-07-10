@@ -25,7 +25,7 @@ class _MenuMoviePageState extends State<MenuMoviePage> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 1), () {
       setState(() {
         isLoading = false;
       });
@@ -74,7 +74,7 @@ class _MenuMoviePageState extends State<MenuMoviePage> {
                   },
                   child: Container(
                     decoration: BoxDecoration(
-                      color: backgroundColor.withOpacity(.25),
+                      color: primaryColor.withOpacity(.5),
                       borderRadius: BorderRadius.circular(40),
                     ),
                     padding: const EdgeInsets.all(8),
@@ -90,7 +90,7 @@ class _MenuMoviePageState extends State<MenuMoviePage> {
                   onTap: () {},
                   child: Container(
                     decoration: BoxDecoration(
-                      color: backgroundColor.withOpacity(.25),
+                      color: primaryColor.withOpacity(.5),
                       borderRadius: BorderRadius.circular(40),
                     ),
                     padding: const EdgeInsets.all(8),
