@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:indoscape/common/color.dart';
 import 'package:indoscape/common/gap.dart';
 import 'package:indoscape/common/typography.dart';

@@ -5,7 +5,7 @@ import 'package:indoscape/common/gap.dart';
 import 'package:indoscape/common/typography.dart';
 import 'package:indoscape/data/models/movie_model.dart';
 import 'package:indoscape/data/repositories/repository.dart';
-import 'package:indoscape/presentation/page/home_page.dart';
+import 'package:indoscape/presentation/page/movies/category_movie_page.dart';
 import 'package:indoscape/presentation/page/movies/detail_movie_page.dart';
 import 'package:indoscape/presentation/widget/shimmer_widget.dart';
 import 'package:skeletons/skeletons.dart';
@@ -46,15 +46,15 @@ class _MenuMoviePageState extends State<MenuMoviePage> {
                 children: [
                   _carouselMoviesNowPlaying(),
                   const VerticalGap20(),
-                  _titleCategory('Popular Movies', HomePage.routeName),
+                  _titleCategory('Popular Movies', 1),
                   const VerticalGap10(),
                   _moviesListByCategory(Repository().getPopularMovies(page)),
                   const VerticalGap10(),
-                  _titleCategory('Top Rated Movies', HomePage.routeName),
+                  _titleCategory('Top Rated Movies', 2),
                   const VerticalGap10(),
                   _moviesListByCategory(Repository().getTopRatedMovies(page)),
                   const VerticalGap10(),
-                  _titleCategory('Upcoming Movies', HomePage.routeName),
+                  _titleCategory('Upcoming Movies', 3),
                   const VerticalGap10(),
                   _moviesListByCategory(Repository().getUpcomingMovies(page)),
                 ],
@@ -87,7 +87,13 @@ class _MenuMoviePageState extends State<MenuMoviePage> {
                   ),
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Coming Soon'),
+                      ),
+                    );
+                  },
                   child: Container(
                     decoration: BoxDecoration(
                       color: primaryColor.withOpacity(.5),
@@ -313,9 +319,15 @@ class _MenuMoviePageState extends State<MenuMoviePage> {
     );
   }
 
-  InkWell _titleCategory(String title, String routeName) {
+  InkWell _titleCategory(String title, int id) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          CategoryMoviePage.routeName,
+          arguments: id,
+        );
+      },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Row(
@@ -341,7 +353,7 @@ class _MenuMoviePageState extends State<MenuMoviePage> {
             ),
             Text(
               'Show all',
-              style: jakartaBodyText1.copyWith(color: primaryColor),
+              style: jakartaBodyText2.copyWith(color: primaryColor),
             )
           ],
         ),

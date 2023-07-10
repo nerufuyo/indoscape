@@ -5,6 +5,7 @@ import 'package:indoscape/presentation/page/home_page.dart';
 import 'package:indoscape/presentation/page/menu_about_page.dart';
 import 'package:indoscape/presentation/page/menu_movie_page.dart';
 import 'package:indoscape/presentation/page/menu_weather_page.dart';
+import 'package:indoscape/presentation/page/movies/category_movie_page.dart';
 import 'package:indoscape/presentation/page/movies/detail_movie_page.dart';
 import 'package:indoscape/presentation/page/news_page.dart';
 import 'package:indoscape/presentation/widget/navigation_widget.dart';
@@ -43,6 +44,10 @@ class MyApp extends StatelessWidget {
           case MenuWeatherPage.routeName:
             return MaterialPageRoute(
                 builder: (context) => const MenuWeatherPage());
+          case CategoryMoviePage.routeName:
+            int id = settings.arguments as int;
+            return MaterialPageRoute(
+                builder: (context) => CategoryMoviePage(id: id));
           case DetailMoviePage.routeName:
             int id = settings.arguments as int;
             return MaterialPageRoute(
