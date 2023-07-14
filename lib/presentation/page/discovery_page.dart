@@ -7,8 +7,8 @@ import 'package:indoscape/common/gap.dart';
 import 'package:indoscape/common/typography.dart';
 import 'package:indoscape/data/repositories/repository.dart';
 import 'package:indoscape/domain/usecase/get_location.dart';
-import 'package:indoscape/presentation/page/menu_about_page.dart';
-import 'package:indoscape/presentation/page/menu_weather_page.dart';
+import 'package:indoscape/presentation/page/menu/menu_about_page.dart';
+import 'package:indoscape/presentation/page/menu/menu_weather_page.dart';
 import 'package:indoscape/presentation/widget/shimmer_widget.dart';
 import 'package:skeletons/skeletons.dart';
 

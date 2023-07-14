@@ -2,9 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:indoscape/presentation/page/menu_about_page.dart';
-import 'package:indoscape/presentation/page/menu_movie_page.dart';
-import 'package:indoscape/presentation/page/menu_weather_page.dart';
+import 'package:indoscape/presentation/page/menu/menu_about_page.dart';
+import 'package:indoscape/presentation/page/menu/menu_food_page.dart';
+import 'package:indoscape/presentation/page/menu/menu_movie_page.dart';
+import 'package:indoscape/presentation/page/menu/menu_weather_page.dart';
 
 double kelvinToCelsius(double kelvin) {
   return kelvin - 273.15;
@@ -22,7 +23,7 @@ List floatingMenuContentText = [
   'Movie',
   'City',
   'Weather',
-  'Food Drink',
+  'Food',
 ];
 
 List flostingMenuContentIcon = [
@@ -44,7 +45,7 @@ List floatingMenuContentRoute = [
   MenuMoviePage.routeName,
   MenuAboutPage.routeName,
   MenuWeatherPage.routeName,
-  MenuAboutPage.routeName,
+  MenuFoodPage.routeName,
 ];
 
 List flostingMenuContentColor = [

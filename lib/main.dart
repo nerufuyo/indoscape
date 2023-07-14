@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:indoscape/presentation/page/discovery_page.dart';
 import 'package:indoscape/presentation/page/home_page.dart';
-import 'package:indoscape/presentation/page/menu_about_page.dart';
-import 'package:indoscape/presentation/page/menu_movie_page.dart';
-import 'package:indoscape/presentation/page/menu_weather_page.dart';
+import 'package:indoscape/presentation/page/introduction_page.dart';
+import 'package:indoscape/presentation/page/menu/menu_about_page.dart';
+import 'package:indoscape/presentation/page/menu/menu_food_page.dart';
+import 'package:indoscape/presentation/page/menu/menu_movie_page.dart';
+import 'package:indoscape/presentation/page/menu/menu_weather_page.dart';
 import 'package:indoscape/presentation/page/movies/category_movie_page.dart';
 import 'package:indoscape/presentation/page/movies/detail_movie_page.dart';
 import 'package:indoscape/presentation/page/news_page.dart';
@@ -26,6 +28,9 @@ class MyApp extends StatelessWidget {
       initialRoute: NavigationWidget.routeName,
       onGenerateRoute: (settings) {
         switch (settings.name) {
+          case IntroductionPage.routeName:
+            return MaterialPageRoute(
+                builder: (context) => const IntroductionPage());
           case NavigationWidget.routeName:
             return MaterialPageRoute(
                 builder: (context) => const NavigationWidget());
@@ -44,6 +49,9 @@ class MyApp extends StatelessWidget {
           case MenuWeatherPage.routeName:
             return MaterialPageRoute(
                 builder: (context) => const MenuWeatherPage());
+          case MenuFoodPage.routeName:
+            return MaterialPageRoute(
+                builder: (context) => const MenuFoodPage());
           case CategoryMoviePage.routeName:
             int id = settings.arguments as int;
             return MaterialPageRoute(

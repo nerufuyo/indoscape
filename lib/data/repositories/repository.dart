@@ -1,11 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:indoscape/data/models/charades_model.dart';
 import 'package:indoscape/data/models/country_model.dart';
 import 'package:indoscape/data/models/detail_movie_model.dart';
+import 'package:indoscape/data/models/food_model.dart';
 import 'package:indoscape/data/models/movie_model.dart';
 import 'package:indoscape/data/models/news_model.dart';
 import 'package:indoscape/data/models/news_station_model.dart';
@@ -16,15 +18,15 @@ import 'package:indoscape/data/models/weather_model.dart';
 class Repository {
   final weatherApiKey = dotenv.env['WEATHER_API_KEY'];
   final movieApiKey = dotenv.env['MOVIE_API_KEY'];
-  final newsBaseUrl = 'https://api-berita-indonesia.vercel.app/';
-  final quakeBaseUrl = 'https://cuaca-gempa-rest-api.vercel.app/';
-  final charadesBaseUrl = 'https://api.akuari.my.id/games/tebakkata';
-  final weatherBaseUrl = 'api.openweathermap.org';
-  final movieBaseUrl = 'api.themoviedb.org';
+  final newsBaseUrl = dotenv.env['NEWS_API'];
+  final quakeBaseUrl = dotenv.env['QUAKE_API'];
+  final charadesBaseUrl = dotenv.env['CHARADES_API'];
+  final weatherBaseUrl = dotenv.env['WEATHER_API'];
+  final movieBaseUrl = dotenv.env['MOVIE_API'];
+  final countryBaseUrl = dotenv.env['COUNTRY_API'];
 
   Future<List<Country>> getCountryInformation() async {
-    final response = await http
-        .get(Uri.parse('https://restcountries.com/v3.1/name/indonesia'));
+    final response = await http.get(Uri.parse(countryBaseUrl!));
 
     try {
       if (response.statusCode == 200) {
@@ -46,7 +48,7 @@ class Repository {
   }
 
   Future<List<NewsStationListModel>> getNewsStationList() async {
-    final response = await http.get(Uri.parse(newsBaseUrl));
+    final response = await http.get(Uri.parse(newsBaseUrl!));
 
     try {
       if (response.statusCode == 200) {
@@ -104,7 +106,7 @@ class Repository {
       'lon': lon,
       'appid': weatherApiKey.toString(),
     };
-    Uri uri = Uri.https(weatherBaseUrl, '/data/2.5/weather', parameters);
+    Uri uri = Uri.https(weatherBaseUrl!, '/data/2.5/weather', parameters);
 
     final response = await http.get(uri, headers: header);
 
@@ -129,7 +131,7 @@ class Repository {
       'lon': lon,
       'appid': weatherApiKey.toString(),
     };
-    Uri uri = Uri.https(weatherBaseUrl, '/data/2.5/forecast', parameters);
+    Uri uri = Uri.https(weatherBaseUrl!, '/data/2.5/forecast', parameters);
 
     final response = await http.get(uri, headers: header);
 
@@ -156,7 +158,7 @@ class Repository {
     };
 
     final response = await http.get(
-        Uri.https(movieBaseUrl, '/3/movie/now_playing', parameters),
+      Uri.https(movieBaseUrl!, '/3/movie/now_playing', parameters),
       headers: header,
     );
 
@@ -183,7 +185,7 @@ class Repository {
     };
 
     final response = await http.get(
-        Uri.https(movieBaseUrl, '/3/movie/popular', parameters),
+      Uri.https(movieBaseUrl!, '/3/movie/popular', parameters),
       headers: header,
     );
 
@@ -210,7 +212,7 @@ class Repository {
     };
 
     final response = await http.get(
-        Uri.https(movieBaseUrl, '/3/movie/top_rated', parameters),
+      Uri.https(movieBaseUrl!, '/3/movie/top_rated', parameters),
       headers: header,
     );
 
@@ -237,7 +239,7 @@ class Repository {
     };
 
     final response = await http.get(
-        Uri.https(movieBaseUrl, '/3/movie/upcoming', parameters),
+      Uri.https(movieBaseUrl!, '/3/movie/upcoming', parameters),
       headers: header,
     );
 
@@ -262,7 +264,7 @@ class Repository {
     };
 
     final response = await http.get(
-      Uri.https(movieBaseUrl, '/3/movie/$id', parameters),
+      Uri.https(movieBaseUrl!, '/3/movie/$id', parameters),
       headers: header,
     );
 
@@ -279,13 +281,29 @@ class Repository {
   }
 
   Future<CharadesModel> getCharades() async {
-    final response = await http.get(Uri.parse(charadesBaseUrl));
+    final response = await http.get(Uri.parse(charadesBaseUrl!));
     try {
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
         return CharadesModel.fromJson(data['hasil']);
       } else {
         throw Exception('Failed to load charades list');
+      }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<List<FoodModel>> getFoodList() async {
+    final String response =
+        await rootBundle.loadString('lib/assets/json/food.json');
+    try {
+      if (response.isNotEmpty) {
+        final Map<String, dynamic> data = json.decode(response);
+        final List<dynamic> foodList = data['foods'];
+        return foodList.map((e) => FoodModel.fromJson(e)).toList();
+      } else {
+        throw Exception('Failed to load food list');
       }
     } catch (e) {
       throw Exception(e.toString());
