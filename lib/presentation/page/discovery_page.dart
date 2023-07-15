@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:indoscape/common/color.dart';
 import 'package:indoscape/common/constant.dart';
@@ -49,7 +48,6 @@ class _ExplorePageState extends State<ExplorePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundColor,
-      appBar: _appBarMethod(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
@@ -460,80 +458,6 @@ class _ExplorePageState extends State<ExplorePage> {
               }
             },
           ),
-        ),
-      ),
-    );
-  }
-
-  AppBar _appBarMethod() {
-    return AppBar(
-      automaticallyImplyLeading: false,
-      backgroundColor: backgroundColor,
-      elevation: 0,
-      title: Skeleton(
-        isLoading: isLoading,
-        duration: const Duration(seconds: 2),
-        themeMode: ThemeMode.light,
-        shimmerGradient: _shimmerGradientCustom(),
-        skeleton: ShimmerAppBarWidget(context: context),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  '$greetingVar!',
-                  style: jakartaH3.copyWith(color: textColor),
-                ),
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.pin_drop_outlined,
-                      size: 16,
-                      color: textColor,
-                    ),
-                    const HorizontalGap5(),
-                    Text(
-                      addressVar.toString(),
-                      style: jakartaCaption.copyWith(color: textColor),
-                    ),
-                  ],
-                )
-              ],
-            ),
-            InkWell(
-              onTap: () {},
-              focusColor: primaryColor,
-              hoverColor: primaryColor,
-              highlightColor: primaryColor,
-              child: Stack(
-                children: [
-                  const Icon(
-                    FontAwesomeIcons.solidBell,
-                    size: 24,
-                    color: textColor,
-                  ),
-                  Positioned(
-                    top: 0,
-                    right: 0,
-                    child: Container(
-                      height: 12,
-                      width: 12,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: backgroundColor,
-                          width: 2,
-                        ),
-                        borderRadius: BorderRadius.circular(40),
-                        color: primaryColor,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
         ),
       ),
     );

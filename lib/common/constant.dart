@@ -17,13 +17,13 @@ double metersToKilometers(double meters) {
 
 List floatingMenuContentText = [
   'About',
-  'Mountain',
-  'Culture',
-  'Travel',
-  'Movie',
-  'City',
+  'Mountains',
+  'Cultures',
+  'Travels',
+  'Movies',
+  'Cities',
   'Weather',
-  'Food',
+  'Foods',
 ];
 
 List flostingMenuContentIcon = [

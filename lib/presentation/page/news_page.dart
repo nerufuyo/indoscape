@@ -1,14 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:indoscape/common/color.dart';
 import 'package:indoscape/common/gap.dart';
 import 'package:indoscape/common/typography.dart';
 import 'package:indoscape/data/models/news_model.dart';
 import 'package:indoscape/data/models/news_station_model.dart';
 import 'package:indoscape/data/repositories/repository.dart';
-import 'package:indoscape/domain/usecase/get_location.dart';
 import 'package:indoscape/presentation/widget/loading_widget.dart';
 import 'package:indoscape/presentation/widget/shimmer_widget.dart';
 import 'package:intl/intl.dart';
@@ -23,8 +21,6 @@ class NewsPage extends StatefulWidget {
 }
 
 class _NewsPageState extends State<NewsPage> {
-  String? greetingVar;
-  String? addressVar;
   bool isLoading = true;
   String dropdownValue = 'antara';
   String newCategory = 'terbaru';
@@ -33,7 +29,6 @@ class _NewsPageState extends State<NewsPage> {
 
   @override
   void initState() {
-    loadData();
     Future.delayed(const Duration(seconds: 3), () {
       setState(() {
         isLoading = false;
@@ -51,7 +46,6 @@ class _NewsPageState extends State<NewsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundColor,
-      appBar: _appBarMethod(),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -80,7 +74,10 @@ class _NewsPageState extends State<NewsPage> {
                     ),
                   );
                 } else {
-                  return const LoadingNewsNavigation();
+                  return const Padding(
+                    padding: EdgeInsets.only(top: 16),
+                    child: LoadingNewsNavigation(),
+                  );
                 }
               },
             ),
@@ -389,7 +386,10 @@ class _NewsPageState extends State<NewsPage> {
       duration: const Duration(seconds: 2),
       themeMode: ThemeMode.light,
       shimmerGradient: _shimmerGradientCustom(),
-      skeleton: ShimmerDropDownNewsStation(context: context),
+      skeleton: Padding(
+        padding: const EdgeInsets.only(top: 16),
+        child: ShimmerDropDownNewsStation(context: context),
+      ),
       child: SizedBox(
         child: DropdownButton(
           value: dropdownValue,
@@ -438,7 +438,10 @@ class _NewsPageState extends State<NewsPage> {
             duration: const Duration(seconds: 2),
             themeMode: ThemeMode.light,
             shimmerGradient: _shimmerGradientCustom(),
-            skeleton: const ShimmerNewsCategory(),
+            skeleton: const Padding(
+              padding: EdgeInsets.only(top: 16),
+              child: ShimmerNewsCategory(),
+            ),
             child: Row(
               children: snapshot.data![selectedNameIndex].paths!.map<Widget>(
                 (path) {
@@ -489,80 +492,6 @@ class _NewsPageState extends State<NewsPage> {
     );
   }
 
-  AppBar _appBarMethod() {
-    return AppBar(
-      automaticallyImplyLeading: false,
-      backgroundColor: backgroundColor,
-      elevation: 0,
-      title: Skeleton(
-        isLoading: isLoading,
-        duration: const Duration(seconds: 2),
-        themeMode: ThemeMode.light,
-        shimmerGradient: _shimmerGradientCustom(),
-        skeleton: ShimmerAppBarWidget(context: context),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  '$greetingVar!',
-                  style: jakartaH3.copyWith(color: textColor),
-                ),
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.pin_drop_outlined,
-                      size: 16,
-                      color: textColor,
-                    ),
-                    const HorizontalGap5(),
-                    Text(
-                      addressVar.toString(),
-                      style: jakartaCaption.copyWith(color: textColor),
-                    ),
-                  ],
-                )
-              ],
-            ),
-            InkWell(
-              onTap: () {},
-              focusColor: primaryColor,
-              hoverColor: primaryColor,
-              highlightColor: primaryColor,
-              child: Stack(
-                children: [
-                  const Icon(
-                    FontAwesomeIcons.solidBell,
-                    size: 24,
-                    color: textColor,
-                  ),
-                  Positioned(
-                    top: 0,
-                    right: 0,
-                    child: Container(
-                      height: 12,
-                      width: 12,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: backgroundColor,
-                          width: 2,
-                        ),
-                        borderRadius: BorderRadius.circular(40),
-                        color: primaryColor,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
   LinearGradient _shimmerGradientCustom() {
     return LinearGradient(
       colors: [
@@ -575,51 +504,5 @@ class _NewsPageState extends State<NewsPage> {
       stops: const [0.0, 0.5, 1.0],
       tileMode: TileMode.repeated,
     );
-  }
-
-  void loadData() async {
-    getLocation();
-    greetUser();
-  }
-
-  Future getLocation() async {
-    double latitude = 0;
-    double longitude = 0;
-    try {
-      Position position = await getCurrentLocation();
-      setState(() {
-        latitude = position.latitude;
-        longitude = position.longitude;
-      });
-      String address = await getAddress(latitude, longitude);
-      setState(() {
-        addressVar = address;
-      });
-      return address;
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Error: $e'),
-        ),
-      );
-    }
-  }
-
-  Future greetUser() async {
-    DateTime now = DateTime.now();
-    int hour = now.hour;
-    if (hour < 12) {
-      setState(() {
-        greetingVar = 'Good Morning';
-      });
-    } else if (hour < 18) {
-      setState(() {
-        greetingVar = 'Good Afternoon';
-      });
-    } else {
-      setState(() {
-        greetingVar = 'Good Evening';
-      });
-    }
   }
 }

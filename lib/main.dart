@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:indoscape/presentation/page/discovery_page.dart';
+import 'package:indoscape/presentation/page/foods/food_detail_page.dart';
 import 'package:indoscape/presentation/page/home_page.dart';
 import 'package:indoscape/presentation/page/introduction_page.dart';
 import 'package:indoscape/presentation/page/menu/menu_about_page.dart';
@@ -56,6 +57,10 @@ class MyApp extends StatelessWidget {
             int id = settings.arguments as int;
             return MaterialPageRoute(
                 builder: (context) => CategoryMoviePage(id: id));
+          case FoodDetailPage.routeName:
+            int id = settings.arguments as int;
+            return MaterialPageRoute(
+                builder: (context) => FoodDetailPage(id: id));
           case DetailMoviePage.routeName:
             int id = settings.arguments as int;
             return MaterialPageRoute(

@@ -1,13 +1,15 @@
 // ignore_for_file: constant_identifier_names
 
 class FoodModel {
+  final int? id;
   final String? name;
   final String? description;
   final String? imageUrl;
-  final Region? region;
+  final String? region;
   final String? price;
 
   FoodModel({
+    this.id,
     this.name,
     this.description,
     this.imageUrl,
@@ -16,35 +18,20 @@ class FoodModel {
   });
 
   factory FoodModel.fromJson(Map<String, dynamic> json) => FoodModel(
+        id: json["id"],
         name: json["name"],
         description: json["description"],
         imageUrl: json["image_url"],
-        region: regionValues.map[json["region"]]!,
+        region: json["region"],
         price: json["price"],
       );
 
   Map<String, dynamic> toJson() => {
+        "id": id,
         "name": name,
         "description": description,
         "image_url": imageUrl,
-        "region": regionValues.reverse[region],
+        "region": region,
         "price": price,
       };
-}
-
-enum Region { JAVA, SUMATRA }
-
-final regionValues =
-    EnumValues({"Java": Region.JAVA, "Sumatra": Region.SUMATRA});
-
-class EnumValues<T> {
-  Map<String, T> map;
-  late Map<T, String> reverseMap;
-
-  EnumValues(this.map);
-
-  Map<T, String> get reverse {
-    reverseMap = map.map((k, v) => MapEntry(v, k));
-    return reverseMap;
-  }
 }

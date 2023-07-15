@@ -25,6 +25,7 @@ class _MenuFoodPageState extends State<MenuFoodPage> {
             return Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               child: ListView.builder(
                 itemCount: data!.length,
                 itemBuilder: (context, index) {
