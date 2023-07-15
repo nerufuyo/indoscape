@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:indoscape/presentation/page/detail/mountain_detail_page.dart';
 import 'package:indoscape/presentation/page/discovery_page.dart';
+import 'package:indoscape/presentation/page/detail/food_detail_page.dart';
 import 'package:indoscape/presentation/page/home_page.dart';
-import 'package:indoscape/presentation/page/menu_about_page.dart';
-import 'package:indoscape/presentation/page/menu_weather_page.dart';
+import 'package:indoscape/presentation/page/introduction_page.dart';
+import 'package:indoscape/presentation/page/menu/menu_about_page.dart';
+import 'package:indoscape/presentation/page/menu/menu_food_page.dart';
+import 'package:indoscape/presentation/page/menu/menu_mountain_page.dart';
+import 'package:indoscape/presentation/page/menu/menu_movie_page.dart';
+import 'package:indoscape/presentation/page/menu/menu_weather_page.dart';
+import 'package:indoscape/presentation/page/movies/category_movie_page.dart';
+import 'package:indoscape/presentation/page/movies/detail_movie_page.dart';
 import 'package:indoscape/presentation/page/news_page.dart';
 import 'package:indoscape/presentation/widget/navigation_widget.dart';
 
-void main() {
+void main() async {
+  await dotenv.load(fileName: '.env');
   runApp(const MyApp());
 }
 
@@ -21,6 +31,9 @@ class MyApp extends StatelessWidget {
       initialRoute: NavigationWidget.routeName,
       onGenerateRoute: (settings) {
         switch (settings.name) {
+          case IntroductionPage.routeName:
+            return MaterialPageRoute(
+                builder: (context) => const IntroductionPage());
           case NavigationWidget.routeName:
             return MaterialPageRoute(
                 builder: (context) => const NavigationWidget());
@@ -33,9 +46,34 @@ class MyApp extends StatelessWidget {
           case MenuAboutPage.routeName:
             return MaterialPageRoute(
                 builder: (context) => const MenuAboutPage());
+          case MenuMountainPage.routeName:
+            return MaterialPageRoute(
+                builder: (context) => const MenuMountainPage());
+          case MenuMoviePage.routeName:
+            return MaterialPageRoute(
+                builder: (context) => const MenuMoviePage());
           case MenuWeatherPage.routeName:
             return MaterialPageRoute(
                 builder: (context) => const MenuWeatherPage());
+          case MenuFoodPage.routeName:
+            return MaterialPageRoute(
+                builder: (context) => const MenuFoodPage());
+          case CategoryMoviePage.routeName:
+            int id = settings.arguments as int;
+            return MaterialPageRoute(
+                builder: (context) => CategoryMoviePage(id: id));
+          case FoodDetailPage.routeName:
+            int id = settings.arguments as int;
+            return MaterialPageRoute(
+                builder: (context) => FoodDetailPage(id: id));
+          case DetailMoviePage.routeName:
+            int id = settings.arguments as int;
+            return MaterialPageRoute(
+                builder: (context) => DetailMoviePage(id: id));
+          case DetailMountainPage.routeName:
+            int id = settings.arguments as int;
+            return MaterialPageRoute(
+                builder: (context) => DetailMountainPage(id: id));
           default:
             return MaterialPageRoute(
                 builder: (context) => const NavigationWidget());

@@ -1,13 +1,16 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:indoscape/common/color.dart';
 import 'package:indoscape/common/constant.dart';
 import 'package:indoscape/common/gap.dart';
 import 'package:indoscape/common/typography.dart';
-import 'package:indoscape/domain/usecase/get_location.dart';
+import 'package:indoscape/data/models/food_model.dart';
+import 'package:indoscape/data/repositories/repository.dart';
+import 'package:indoscape/presentation/page/detail/food_detail_page.dart';
+import 'package:indoscape/presentation/page/detail/mountain_detail_page.dart';
+import 'package:indoscape/presentation/page/menu/menu_food_page.dart';
 import 'package:indoscape/presentation/widget/shimmer_widget.dart';
 import 'package:skeletons/skeletons.dart';
 
@@ -20,13 +23,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String? addressVar;
-  String? greetingVar;
   bool isLoading = true;
 
   @override
   void initState() {
-    loadData();
     Future.delayed(const Duration(seconds: 3), () {
       setState(() {
         isLoading = false;
@@ -43,7 +43,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _appBarMethod(),
       body: SingleChildScrollView(
         child: Stack(
           children: [
@@ -81,12 +80,11 @@ class _HomePageState extends State<HomePage> {
               const VerticalGap10(),
               _tavelContent(context),
               const VerticalGap20(),
-              _fooddrinksTitle(),
+              _mountainContent(),
+              const VerticalGap20(),
+              _foodTitle(),
               const VerticalGap10(),
-              _fooddrinksContent(context),
-              const VerticalGap30(),
-              const VerticalGap30(),
-              const VerticalGap30(),
+              _foodsContent(),
             ],
           ),
         ),
@@ -94,130 +92,295 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  SizedBox _fooddrinksContent(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height / 8,
-      child: ListView.separated(
-        padding: const EdgeInsets.only(left: 16),
-        scrollDirection: Axis.horizontal,
-        separatorBuilder: (BuildContext context, index) =>
-            const HorizontalGap5(),
-        itemCount: 10,
-        itemBuilder: (BuildContext context, index) {
-          return Skeleton(
-            isLoading: isLoading,
-            duration: const Duration(seconds: 2),
-            themeMode: ThemeMode.light,
-            shimmerGradient: _shimmerGradientCustom(),
-            skeleton: const ShimmerFoodDrinkWidget(),
-            child: Container(
-              width: MediaQuery.of(context).size.width / 1.25,
-              decoration: BoxDecoration(
-                color: backgroundColor,
-                border: Border.all(
-                  color: textColor.withOpacity(.15),
-                  width: 2,
-                ),
-                borderRadius: BorderRadius.circular(16),
+  Skeleton _mountainContent() {
+    return Skeleton(
+      isLoading: isLoading,
+      duration: const Duration(seconds: 2),
+      themeMode: ThemeMode.light,
+      shimmerGradient: _shimmerGradientCustom(),
+      skeleton: ShimmerMountainCarousel(context: context),
+      child: FutureBuilder(
+        future: Repository().getMountainList(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            final data = snapshot.data;
+            return CarouselSlider.builder(
+              options: CarouselOptions(
+                height: MediaQuery.of(context).size.height / 5,
+                autoPlay: true,
+                aspectRatio: 16 / 9,
+                autoPlayInterval: const Duration(seconds: 20),
+                autoPlayAnimationDuration: const Duration(milliseconds: 500),
+                autoPlayCurve: Curves.easeInOut,
+                clipBehavior: Clip.hardEdge,
+                viewportFraction: 1,
+                pauseAutoPlayOnTouch: true,
               ),
-              padding: const EdgeInsets.all(8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width / 6,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      image: const DecorationImage(
-                        image: AssetImage('lib/assets/images/bakso.jpg'),
-                        fit: BoxFit.cover,
+              itemCount: 10,
+              itemBuilder: (BuildContext context, int index, int realIndex) {
+                final mountain = data![index];
+                return InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      DetailMountainPage.routeName,
+                      arguments: mountain.id,
+                    );
+                  },
+                  child: Stack(
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width / 1.075,
+                        decoration: BoxDecoration(
+                          color: backgroundColor,
+                          borderRadius: BorderRadius.circular(16),
+                          image: DecorationImage(
+                            image: AssetImage(mountain.image.toString()),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                       ),
-                    ),
+                      Positioned(
+                        top: 0,
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16),
+                            gradient: const LinearGradient(
+                              colors: [
+                                Colors.transparent,
+                                textColor,
+                              ],
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        top: 8,
+                        right: 8,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: primaryColor,
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 8,
+                          ),
+                          child: Text(
+                            mountain.active == true ? 'Active' : 'Non-Active',
+                            style: jakartaCaption.copyWith(
+                              color: backgroundColor,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 8,
+                        left: 8,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 8,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Icon(
+                                    Icons.location_on,
+                                    color: primaryColor,
+                                    size: 16,
+                                  ),
+                                  const HorizontalGap5(),
+                                  Text(
+                                    mountain.region.toString(),
+                                    style: jakartaBodyText2.copyWith(
+                                      color: backgroundColor,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Text(
+                                'Mountain ${mountain.name.toString()}',
+                                style: jakartaH3.copyWith(
+                                  color: backgroundColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                  Container(
-                    width: MediaQuery.of(context).size.width / 1.75,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 4,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            const Icon(
-                              FontAwesomeIcons.utensils,
-                              size: 12,
-                              color: primaryColor,
-                            ),
-                            const HorizontalGap5(),
-                            Text(
-                              'Food & Drinks',
-                              style: jakartaH6,
-                            ),
-                          ],
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Bakso',
-                              style: jakartaH4,
-                            ),
-                            Text(
-                              'Rp. 10.000',
-                              style: jakartaH5,
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            const Icon(
-                              FontAwesomeIcons.mapMarkerAlt,
-                              size: 12,
-                              color: primaryColor,
-                            ),
-                            const HorizontalGap5(),
-                            Text(
-                              'Jl. Jend. Sudirman No. 1',
-                              style: jakartaH6,
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+                );
+              },
+            );
+          } else if (snapshot.hasError) {
+            return const Center(
+              child: Text('Error'),
+            );
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(
+                color: primaryColor,
               ),
-            ),
-          );
+            );
+          }
         },
       ),
     );
   }
 
-  Padding _fooddrinksTitle() {
+  FutureBuilder<List<FoodModel>> _foodsContent() {
+    return FutureBuilder(
+      future: Repository().getFoodList(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          final data = snapshot.data;
+          return SizedBox(
+            height: MediaQuery.of(context).size.height / 8,
+            child: ListView.separated(
+              padding: const EdgeInsets.only(left: 16),
+              scrollDirection: Axis.horizontal,
+              separatorBuilder: (BuildContext context, index) =>
+                  const HorizontalGap5(),
+              itemCount: data!.length,
+              itemBuilder: (BuildContext context, index) {
+                final food = data[index];
+                return Skeleton(
+                  isLoading: isLoading,
+                  duration: const Duration(seconds: 2),
+                  themeMode: ThemeMode.light,
+                  shimmerGradient: _shimmerGradientCustom(),
+                  skeleton: const ShimmerFoodDrinkWidget(),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        FoodDetailPage.routeName,
+                        arguments: food.id,
+                      );
+                    },
+                    child: Container(
+                      width: MediaQuery.of(context).size.width / 1.25,
+                      decoration: BoxDecoration(
+                        color: backgroundColor,
+                        border: Border.all(
+                          color: textColor.withOpacity(.15),
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      padding: const EdgeInsets.all(8),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width / 6,
+                            height: 100,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16),
+                              image: DecorationImage(
+                                image: AssetImage(food.imageUrl.toString()),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            width: MediaQuery.of(context).size.width / 1.75,
+                            height: 100,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            padding: const EdgeInsets.all(4),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Text(
+                                      food.name.toString(),
+                                      style: jakartaH4,
+                                    ),
+                                    const HorizontalGap5(),
+                                    Text(
+                                      food.region.toString(),
+                                      style: jakartaH6.copyWith(
+                                        color: primaryColor,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Text(
+                                  food.price.toString(),
+                                  style: jakartaH5,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                Text(
+                                  food.description.toString(),
+                                  style: jakartaButton,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          );
+        } else if (snapshot.hasError) {
+          return const Center(
+            child: Text('Error'),
+          );
+        } else {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
+    );
+  }
+
+  Padding _foodTitle() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            'Ordinary Foods & Drinks',
-            style: jakartaH3,
-          ),
-          Text(
-            'See All',
-            style: jakartaButton.copyWith(color: primaryColor),
-          ),
-        ],
+      child: InkWell(
+        onTap: () {
+          Navigator.pushNamed(context, MenuFoodPage.routeName);
+        },
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Traditional Foods',
+              style: jakartaH3,
+            ),
+            Text(
+              'See All',
+              style: jakartaButton.copyWith(color: primaryColor),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -490,80 +653,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  AppBar _appBarMethod() {
-    return AppBar(
-      automaticallyImplyLeading: false,
-      backgroundColor: primaryColor,
-      elevation: 0,
-      title: Skeleton(
-        isLoading: isLoading,
-        duration: const Duration(seconds: 2),
-        themeMode: ThemeMode.light,
-        shimmerGradient: _shimmerGradientCustom(),
-        skeleton: ShimmerAppBarWidget(context: context),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  '$greetingVar!',
-                  style: jakartaH3.copyWith(color: backgroundColor),
-                ),
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.pin_drop_outlined,
-                      size: 16,
-                      color: backgroundColor,
-                    ),
-                    const HorizontalGap5(),
-                    Text(
-                      addressVar.toString(),
-                      style: jakartaCaption.copyWith(color: backgroundColor),
-                    ),
-                  ],
-                )
-              ],
-            ),
-            InkWell(
-              onTap: () {},
-              focusColor: primaryColor,
-              hoverColor: primaryColor,
-              highlightColor: primaryColor,
-              child: Stack(
-                children: [
-                  const Icon(
-                    FontAwesomeIcons.solidBell,
-                    size: 24,
-                    color: backgroundColor,
-                  ),
-                  Positioned(
-                    top: 0,
-                    right: 0,
-                    child: Container(
-                      height: 12,
-                      width: 12,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: primaryColor,
-                          width: 2,
-                        ),
-                        borderRadius: BorderRadius.circular(40),
-                        color: accentColor,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
   LinearGradient _shimmerGradientCustom() {
     return LinearGradient(
       colors: [
@@ -576,51 +665,5 @@ class _HomePageState extends State<HomePage> {
       stops: const [0.0, 0.5, 1.0],
       tileMode: TileMode.repeated,
     );
-  }
-
-  void loadData() async {
-    getLocation();
-    greetUser();
-  }
-
-  Future getLocation() async {
-    double latitude = 0;
-    double longitude = 0;
-    try {
-      Position position = await getCurrentLocation();
-      setState(() {
-        latitude = position.latitude;
-        longitude = position.longitude;
-      });
-      String address = await getAddress(latitude, longitude);
-      setState(() {
-        addressVar = address;
-      });
-      return address;
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Error: $e'),
-        ),
-      );
-    }
-  }
-
-  Future greetUser() async {
-    DateTime now = DateTime.now();
-    int hour = now.hour;
-    if (hour < 12) {
-      setState(() {
-        greetingVar = 'Good Morning';
-      });
-    } else if (hour < 18) {
-      setState(() {
-        greetingVar = 'Good Afternoon';
-      });
-    } else {
-      setState(() {
-        greetingVar = 'Good Evening';
-      });
-    }
   }
 }

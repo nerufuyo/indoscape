@@ -9,6 +9,10 @@
 .history
 .svn/
 migrate_working_dir/
+.env
+.json
+/lib/assets/
+
 
 # IntelliJ related
 *.iml

@@ -2,8 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:indoscape/presentation/page/menu_about_page.dart';
-import 'package:indoscape/presentation/page/menu_weather_page.dart';
+import 'package:indoscape/presentation/page/menu/menu_about_page.dart';
+import 'package:indoscape/presentation/page/menu/menu_food_page.dart';
+import 'package:indoscape/presentation/page/menu/menu_mountain_page.dart';
+import 'package:indoscape/presentation/page/menu/menu_movie_page.dart';
+import 'package:indoscape/presentation/page/menu/menu_weather_page.dart';
 
 double kelvinToCelsius(double kelvin) {
   return kelvin - 273.15;
@@ -15,13 +18,13 @@ double metersToKilometers(double meters) {
 
 List floatingMenuContentText = [
   'About',
-  'Mountain',
-  'Culture',
-  'Travel',
-  'Museum',
-  'City',
+  'Mountains',
+  'Cultures',
+  'Travels',
+  'Movies',
+  'Cities',
   'Weather',
-  'Food Drink',
+  'Foods',
 ];
 
 List flostingMenuContentIcon = [
@@ -29,7 +32,7 @@ List flostingMenuContentIcon = [
   'lib/assets/images/mountain.png',
   'lib/assets/images/culture.png',
   'lib/assets/images/travel.png',
-  'lib/assets/images/museum.png',
+  'lib/assets/images/film.png',
   'lib/assets/images/city.png',
   'lib/assets/images/province.png',
   'lib/assets/images/food.png',
@@ -37,13 +40,13 @@ List flostingMenuContentIcon = [
 
 List floatingMenuContentRoute = [
   MenuAboutPage.routeName,
+  MenuMountainPage.routeName,
   MenuAboutPage.routeName,
   MenuAboutPage.routeName,
-  MenuAboutPage.routeName,
-  MenuAboutPage.routeName,
+  MenuMoviePage.routeName,
   MenuAboutPage.routeName,
   MenuWeatherPage.routeName,
-  MenuAboutPage.routeName,
+  MenuFoodPage.routeName,
 ];
 
 List flostingMenuContentColor = [
@@ -51,7 +54,7 @@ List flostingMenuContentColor = [
   const Color(0xFF15181A),
   const Color(0xFFE8B647),
   const Color(0xFF1EDEEF),
-  const Color(0xFFC75555),
+  const Color(0xFF357FEF),
   const Color(0xFFDEBE79),
   const Color(0xFF95DF8D),
   const Color(0xFF769AE4),
