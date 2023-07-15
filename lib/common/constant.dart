@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:indoscape/presentation/page/menu/menu_about_page.dart';
 import 'package:indoscape/presentation/page/menu/menu_food_page.dart';
+import 'package:indoscape/presentation/page/menu/menu_mountain_page.dart';
 import 'package:indoscape/presentation/page/menu/menu_movie_page.dart';
 import 'package:indoscape/presentation/page/menu/menu_weather_page.dart';
 
@@ -39,7 +40,7 @@ List flostingMenuContentIcon = [
 
 List floatingMenuContentRoute = [
   MenuAboutPage.routeName,
-  MenuAboutPage.routeName,
+  MenuMountainPage.routeName,
   MenuAboutPage.routeName,
   MenuAboutPage.routeName,
   MenuMoviePage.routeName,

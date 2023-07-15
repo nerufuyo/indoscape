@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:indoscape/presentation/page/detail/mountain_detail_page.dart';
 import 'package:indoscape/presentation/page/discovery_page.dart';
-import 'package:indoscape/presentation/page/foods/food_detail_page.dart';
+import 'package:indoscape/presentation/page/detail/food_detail_page.dart';
 import 'package:indoscape/presentation/page/home_page.dart';
 import 'package:indoscape/presentation/page/introduction_page.dart';
 import 'package:indoscape/presentation/page/menu/menu_about_page.dart';
 import 'package:indoscape/presentation/page/menu/menu_food_page.dart';
+import 'package:indoscape/presentation/page/menu/menu_mountain_page.dart';
 import 'package:indoscape/presentation/page/menu/menu_movie_page.dart';
 import 'package:indoscape/presentation/page/menu/menu_weather_page.dart';
 import 'package:indoscape/presentation/page/movies/category_movie_page.dart';
@@ -44,6 +46,9 @@ class MyApp extends StatelessWidget {
           case MenuAboutPage.routeName:
             return MaterialPageRoute(
                 builder: (context) => const MenuAboutPage());
+          case MenuMountainPage.routeName:
+            return MaterialPageRoute(
+                builder: (context) => const MenuMountainPage());
           case MenuMoviePage.routeName:
             return MaterialPageRoute(
                 builder: (context) => const MenuMoviePage());
@@ -65,6 +70,10 @@ class MyApp extends StatelessWidget {
             int id = settings.arguments as int;
             return MaterialPageRoute(
                 builder: (context) => DetailMoviePage(id: id));
+          case DetailMountainPage.routeName:
+            int id = settings.arguments as int;
+            return MaterialPageRoute(
+                builder: (context) => DetailMountainPage(id: id));
           default:
             return MaterialPageRoute(
                 builder: (context) => const NavigationWidget());

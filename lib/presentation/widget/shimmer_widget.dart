@@ -334,3 +334,24 @@ class ShimmerMoviesListView extends StatelessWidget {
         });
   }
 }
+
+class ShimmerMountainCarousel extends StatelessWidget {
+  const ShimmerMountainCarousel({
+    super.key,
+    required this.context,
+  });
+
+  final BuildContext context;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width / 1.075,
+      height: MediaQuery.of(context).size.height / 5,
+      decoration: BoxDecoration(
+        color: primaryColor,
+        borderRadius: BorderRadius.circular(16),
+      ),
+    );
+  }
+}

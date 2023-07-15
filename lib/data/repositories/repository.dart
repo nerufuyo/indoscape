@@ -8,6 +8,7 @@ import 'package:indoscape/data/models/charades_model.dart';
 import 'package:indoscape/data/models/country_model.dart';
 import 'package:indoscape/data/models/detail_movie_model.dart';
 import 'package:indoscape/data/models/food_model.dart';
+import 'package:indoscape/data/models/mountain_model.dart';
 import 'package:indoscape/data/models/movie_model.dart';
 import 'package:indoscape/data/models/news_model.dart';
 import 'package:indoscape/data/models/news_station_model.dart';
@@ -304,6 +305,22 @@ class Repository {
         return foodList.map((e) => FoodModel.fromJson(e)).toList();
       } else {
         throw Exception('Failed to load food list');
+      }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<List<MountainModel>> getMountainList() async {
+    final String response =
+        await rootBundle.loadString('lib/assets/json/mountain.json');
+    try {
+      if (response.isNotEmpty) {
+        final Map<String, dynamic> data = json.decode(response);
+        final List<dynamic> mountainList = data['mountains'];
+        return mountainList.map((e) => MountainModel.fromJson(e)).toList();
+      } else {
+        throw Exception('Failed to load mountain list');
       }
     } catch (e) {
       throw Exception(e.toString());

@@ -4,7 +4,7 @@ import 'package:indoscape/common/color.dart';
 import 'package:indoscape/common/gap.dart';
 import 'package:indoscape/common/typography.dart';
 import 'package:indoscape/data/repositories/repository.dart';
-import 'package:indoscape/presentation/page/foods/food_detail_page.dart';
+import 'package:indoscape/presentation/page/detail/food_detail_page.dart';
 
 class MenuFoodPage extends StatefulWidget {
   const MenuFoodPage({super.key});

@@ -36,6 +36,7 @@ flutter:
   assets:
     - .env
     - lib/assets/json/food.json
+    - lib/assets/json/mountain.json
     - lib/assets/images/indonesiaMap.jpg
     - lib/assets/images/bgBromo.jpg
     - lib/assets/images/bromo.jpg
@@ -69,3 +70,24 @@ flutter:
     - lib/assets/images/gadoGado.jpg
     - lib/assets/images/rendang.jpg
     - lib/assets/images/nasiGoreng.jpg
+    - lib/assets/images/puncakJaya.jpg
+    - lib/assets/images/kerinci.jpg
+    - lib/assets/images/rinjani.jpg
+    - lib/assets/images/semeru.jpg
+    - lib/assets/images/raung.jpg
+    - lib/assets/images/merbabu.jpg
+    - lib/assets/images/lawu.jpg
+    - lib/assets/images/sumbing.jpg
+    - lib/assets/images/slamet.jpg
+    - lib/assets/images/sindoro.jpg
+    - lib/assets/images/merapi.jpg
+    - lib/assets/images/klabat.jpg
+    - lib/assets/images/binaiya.jpg
+    - lib/assets/images/kelimutu.jpg
+    - lib/assets/images/bukitRaya.jpg
+    - lib/assets/images/krakatoa.jpg
+    - lib/assets/images/cikuray.jpg
+    - lib/assets/images/ciremai.jpg
+    - lib/assets/images/patuha.jpg
+    - lib/assets/images/agung.jpg
+    - lib/assets/images/tambora.jpg
