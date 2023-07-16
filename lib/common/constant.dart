@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:indoscape/presentation/page/menu/menu_about_page.dart';
+import 'package:indoscape/presentation/page/menu/menu_cities_page.dart';
 import 'package:indoscape/presentation/page/menu/menu_culture_page.dart';
 import 'package:indoscape/presentation/page/menu/menu_food_page.dart';
 import 'package:indoscape/presentation/page/menu/menu_mountain_page.dart';
@@ -46,7 +47,7 @@ List floatingMenuContentRoute = [
   MenuCulturePage.routeName,
   MenuTravelPage.routeName,
   MenuMoviePage.routeName,
-  MenuAboutPage.routeName,
+  MenuCitiesPage.routeName,
   MenuWeatherPage.routeName,
   MenuFoodPage.routeName,
 ];

@@ -9,6 +9,7 @@ import 'package:indoscape/domain/usecase/get_location.dart';
 import 'package:indoscape/presentation/page/discovery_page.dart';
 import 'package:indoscape/presentation/page/home_page.dart';
 import 'package:indoscape/presentation/page/news_page.dart';
+import 'package:indoscape/presentation/page/profile_page.dart';
 import 'package:indoscape/presentation/widget/shimmer_widget.dart';
 import 'package:skeletons/skeletons.dart';
 
@@ -31,7 +32,7 @@ class _NavigationWidgetState extends State<NavigationWidget> {
     HomePage(),
     ExplorePage(),
     NewsPage(),
-    Text('Profile'),
+    ProfilePage(),
   ];
 
   void onTap(int index) {

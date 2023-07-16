@@ -39,6 +39,9 @@ flutter:
     - lib/assets/json/culture.json
     - lib/assets/json/food.json
     - lib/assets/json/mountain.json
+    - lib/assets/images/intro1.jpg
+    - lib/assets/images/intro2.jpg
+    - lib/assets/images/intro3.jpg
     - lib/assets/images/indonesiaMap.jpg
     - lib/assets/images/bgBromo.jpg
     - lib/assets/images/bromo.jpg
