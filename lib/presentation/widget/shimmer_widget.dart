@@ -349,7 +349,7 @@ class ShimmerMountainCarousel extends StatelessWidget {
       width: MediaQuery.of(context).size.width / 1.075,
       height: MediaQuery.of(context).size.height / 5,
       decoration: BoxDecoration(
-        color: primaryColor,
+        color: primaryColor.withOpacity(.5),
         borderRadius: BorderRadius.circular(16),
       ),
     );

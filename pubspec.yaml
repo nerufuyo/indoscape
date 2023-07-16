@@ -35,8 +35,13 @@ flutter:
   uses-material-design: true
   assets:
     - .env
+    - lib/assets/json/travel.json
+    - lib/assets/json/culture.json
     - lib/assets/json/food.json
     - lib/assets/json/mountain.json
+    - lib/assets/images/intro1.jpg
+    - lib/assets/images/intro2.jpg
+    - lib/assets/images/intro3.jpg
     - lib/assets/images/indonesiaMap.jpg
     - lib/assets/images/bgBromo.jpg
     - lib/assets/images/bromo.jpg
@@ -91,3 +96,43 @@ flutter:
     - lib/assets/images/patuha.jpg
     - lib/assets/images/agung.jpg
     - lib/assets/images/tambora.jpg
+    - lib/assets/images/batik.jpg
+    - lib/assets/images/wayang.jpg
+    - lib/assets/images/gamelan.jpg
+    - lib/assets/images/keris.jpg
+    - lib/assets/images/pencakSilat.jpg
+    - lib/assets/images/angklung.jpg
+    - lib/assets/images/rendang.jpg
+    - lib/assets/images/borobudur.jpg
+    - lib/assets/images/kecak.jpg
+    - lib/assets/images/prambanan.jpg
+    - lib/assets/images/tumpeng.jpg
+    - lib/assets/images/bajidorKahot.jpg
+    - lib/assets/images/reogPonorogo.jpg
+    - lib/assets/images/topeng.jpg
+    - lib/assets/images/wayangKulit.jpg
+    - lib/assets/images/pisBolong.jpg
+    - lib/assets/images/sasando.jpg
+    - lib/assets/images/rejang.jpg
+    - lib/assets/images/joglo.jpg
+    - lib/assets/images/lontongCapGomeh.jpg
+    - lib/assets/images/bali.jpg
+    - lib/assets/images/yogyakarta.jpg
+    - lib/assets/images/komodoNationalPark.jpg
+    - lib/assets/images/rajaAmpat.jpg
+    - lib/assets/images/lombok.jpg
+    - lib/assets/images/jakarta.jpg
+    - lib/assets/images/ubud.jpg
+    - lib/assets/images/borobudur.jpg
+    - lib/assets/images/bromo.jpg
+    - lib/assets/images/giliIsland.jpg
+    - lib/assets/images/tanaToraja.jpg
+    - lib/assets/images/rinjani.jpg
+    - lib/assets/images/bunaken.jpg
+    - lib/assets/images/bandung.jpg
+    - lib/assets/images/derawanIsland.jpg
+    - lib/assets/images/mountIjen.jpg
+    - lib/assets/images/manado.jpg
+    - lib/assets/images/nusaPenida.jpg
+    - lib/assets/images/bandaIsland.jpg
+    - lib/assets/images/sumba.jpg

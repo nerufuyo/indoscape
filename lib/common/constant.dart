@@ -3,9 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:indoscape/presentation/page/menu/menu_about_page.dart';
+import 'package:indoscape/presentation/page/menu/menu_cities_page.dart';
+import 'package:indoscape/presentation/page/menu/menu_culture_page.dart';
 import 'package:indoscape/presentation/page/menu/menu_food_page.dart';
 import 'package:indoscape/presentation/page/menu/menu_mountain_page.dart';
 import 'package:indoscape/presentation/page/menu/menu_movie_page.dart';
+import 'package:indoscape/presentation/page/menu/menu_travel_page.dart';
 import 'package:indoscape/presentation/page/menu/menu_weather_page.dart';
 
 double kelvinToCelsius(double kelvin) {
@@ -41,10 +44,10 @@ List flostingMenuContentIcon = [
 List floatingMenuContentRoute = [
   MenuAboutPage.routeName,
   MenuMountainPage.routeName,
-  MenuAboutPage.routeName,
-  MenuAboutPage.routeName,
+  MenuCulturePage.routeName,
+  MenuTravelPage.routeName,
   MenuMoviePage.routeName,
-  MenuAboutPage.routeName,
+  MenuCitiesPage.routeName,
   MenuWeatherPage.routeName,
   MenuFoodPage.routeName,
 ];

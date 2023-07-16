@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:indoscape/common/color.dart';
+import 'package:indoscape/common/typography.dart';
 import 'package:indoscape/presentation/widget/navigation_widget.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
@@ -11,35 +13,26 @@ class IntroductionPage extends StatefulWidget {
 }
 
 class _IntroductionPageState extends State<IntroductionPage> {
-  @override
-  void initState() {
-    super.initState();
-    // Future.delayed(
-    //   const Duration(seconds: 3),
-    //   () {
-    //     Navigator.pushReplacementNamed(context, NavigationWidget.routeName);
-    //   },
-    // );
-  }
 
   @override
   Widget build(BuildContext context) {
     return IntroductionScreen(
       pages: [
         PageViewModel(
-          title: 'INDOSCAPE',
-          body: 'Aplikasi yang menyajikan informasi seputar Indonesia',
-          image: Image.asset('assets/images/logo.png'),
+          title: 'LOOKING FOR INDONESIA?',
+          body: 'This app will help you to find information about Indonesia',
+          image: Image.asset('lib/assets/images/intro1.jpg'),
         ),
         PageViewModel(
-          title: 'INDOSCAPE',
-          body: 'Aplikasi yang menyajikan informasi seputar Indonesia',
-          image: Image.asset('assets/images/logo.png'),
+          title: 'HAVE ATTENTION TO INDONESIA?',
+          body:
+              'In this app, you can find information about everything in Indonesia',
+          image: Image.asset('lib/assets/images/intro2.jpg'),
         ),
         PageViewModel(
-          title: 'INDOSCAPE',
-          body: 'Aplikasi yang menyajikan informasi seputar Indonesia',
-          image: Image.asset('assets/images/logo.png'),
+          title: 'COME AND JOIN US!',
+          body: 'Let\'s explore Indonesia with us!',
+          image: Image.asset('lib/assets/images/intro3.jpg'),
         ),
       ],
       onDone: () {
@@ -49,13 +42,28 @@ class _IntroductionPageState extends State<IntroductionPage> {
         Navigator.pushReplacementNamed(context, NavigationWidget.routeName);
       },
       showSkipButton: true,
-      skip: const Text('Lewati'),
-      next: const Text('Selanjutnya'),
-      done: const Text('Selesai'),
+      skip: Text(
+        'Lewati',
+        style: jakartaH4.copyWith(
+          color: primaryColor,
+        ),
+      ),
+      next: Text(
+        'Selanjutnya',
+        style: jakartaH4.copyWith(
+          color: primaryColor,
+        ),
+      ),
+      done: Text(
+        'Selesai',
+        style: jakartaH4.copyWith(
+          color: primaryColor,
+        ),
+      ),
       dotsDecorator: DotsDecorator(
         size: const Size.square(10.0),
         activeSize: const Size(20.0, 10.0),
-        activeColor: Colors.blue,
+        activeColor: primaryColor,
         color: Colors.black26,
         spacing: const EdgeInsets.symmetric(horizontal: 3.0),
         activeShape: RoundedRectangleBorder(

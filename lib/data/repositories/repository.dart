@@ -6,6 +6,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:indoscape/data/models/charades_model.dart';
 import 'package:indoscape/data/models/country_model.dart';
+import 'package:indoscape/data/models/culture_model.dart';
 import 'package:indoscape/data/models/detail_movie_model.dart';
 import 'package:indoscape/data/models/food_model.dart';
 import 'package:indoscape/data/models/mountain_model.dart';
@@ -13,6 +14,7 @@ import 'package:indoscape/data/models/movie_model.dart';
 import 'package:indoscape/data/models/news_model.dart';
 import 'package:indoscape/data/models/news_station_model.dart';
 import 'package:indoscape/data/models/quake_model.dart';
+import 'package:indoscape/data/models/travel_model.dart';
 import 'package:indoscape/data/models/weather_hour_model.dart';
 import 'package:indoscape/data/models/weather_model.dart';
 
@@ -321,6 +323,38 @@ class Repository {
         return mountainList.map((e) => MountainModel.fromJson(e)).toList();
       } else {
         throw Exception('Failed to load mountain list');
+      }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<List<CultureModel>> getCultureList() async {
+    final String response =
+        await rootBundle.loadString('lib/assets/json/culture.json');
+    try {
+      if (response.isNotEmpty) {
+        final Map<String, dynamic> data = json.decode(response);
+        final List<dynamic> cultureList = data['cultures'];
+        return cultureList.map((e) => CultureModel.fromJson(e)).toList();
+      } else {
+        throw Exception('Failed to load culture list');
+      }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<List<TravelModel>> getTravelList() async {
+    final String response =
+        await rootBundle.loadString('lib/assets/json/travel.json');
+    try {
+      if (response.isNotEmpty) {
+        final Map<String, dynamic> data = json.decode(response);
+        final List<dynamic> travelList = data['travels'];
+        return travelList.map((e) => TravelModel.fromJson(e)).toList();
+      } else {
+        throw Exception('Failed to load travel list');
       }
     } catch (e) {
       throw Exception(e.toString());
