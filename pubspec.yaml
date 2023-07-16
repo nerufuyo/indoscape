@@ -34,6 +34,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
+    - .env
     - lib/assets/json/travel.json
     - lib/assets/json/culture.json
     - lib/assets/json/food.json
