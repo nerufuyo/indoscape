@@ -1,0 +1,365 @@
+{
+  "travels": [
+    {
+      "id": 1,
+      "name": "Bali",
+      "description": "Bali is an island and province of Indonesia known for its forested volcanic mountains, iconic rice paddies, beaches, and coral reefs. It's a popular destination for its vibrant culture, Hindu temples, and bustling nightlife.",
+      "image": "lib/assets/images/bali.jpg",
+      "culture": "Balinese",
+      "history": "Ancient temples and traditions",
+      "region": "Island of Bali",
+      "type": "Beach, Culture, Adventure",
+      "popularity": 9.5,
+      "highlights": [
+        "Ubud Monkey Forest",
+        "Tanah Lot Temple",
+        "Uluwatu Temple",
+        "Kuta Beach",
+        "Seminyak",
+        "Nusa Penida"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Yogyakarta",
+      "description": "Yogyakarta, often called Jogja, is a city on the island of Java known for its traditional arts and cultural heritage. It's home to two famous UNESCO World Heritage Sites, the Borobudur Temple and Prambanan Temple.",
+      "image": "lib/assets/images/yogyakarta.jpg",
+      "culture": "Javanese",
+      "history": "Ancient kingdoms and temples",
+      "region": "Central Java",
+      "type": "History, Culture",
+      "popularity": 8.9,
+      "highlights": [
+        "Borobudur Temple",
+        "Prambanan Temple",
+        "Kraton Yogyakarta (Sultan's Palace)",
+        "Taman Sari Water Castle",
+        "Malioboro Street"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Komodo National Park",
+      "description": "Komodo National Park is a UNESCO World Heritage Site and home to the Komodo dragon, the world's largest lizard. The park consists of several islands, offering stunning landscapes, crystal-clear waters, and diverse marine life, making it a perfect destination for diving and snorkeling.",
+      "image": "lib/assets/images/komodoNationalPark.jpg",
+      "culture": "Local tribes",
+      "history": "Prehistoric species",
+      "region": "East Nusa Tenggara",
+      "type": "Nature, Wildlife, Adventure",
+      "popularity": 9.0,
+      "highlights": [
+        "Komodo Dragon",
+        "Pink Beach",
+        "Padar Island",
+        "Manta Point",
+        "Kanawa Island"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Raja Ampat",
+      "description": "Raja Ampat is an archipelago comprising over 1,500 small islands known for its pristine beaches, coral reefs, and abundant marine life. It's a paradise for divers and nature enthusiasts.",
+      "image": "lib/assets/images/rajaAmpat.jpg",
+      "culture": "Papuan",
+      "history": "Ancient tribes",
+      "region": "West Papua",
+      "type": "Nature, Diving",
+      "popularity": 9.2,
+      "highlights": [
+        "Wayag Island",
+        "Piaynemo",
+        "Misool Island",
+        "Arborek Village",
+        "Kabui Bay"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Lombok",
+      "description": "Lombok is an island in West Nusa Tenggara province, offering beautiful beaches, waterfalls, and the iconic Mount Rinjani, a popular trekking destination.",
+      "image": "lib/assets/images/lombok.jpg",
+      "culture": "Sasak",
+      "history": "Ancient kingdoms and cultures",
+      "region": "West Nusa Tenggara",
+      "type": "Beach, Trekking",
+      "popularity": 8.6,
+      "highlights": [
+        "Mount Rinjani",
+        "Gili Islands (Gili Trawangan, Gili Air, Gili Meno)",
+        "Kuta Lombok",
+        "Senaru Waterfalls",
+        "Senggigi Beach"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Jakarta",
+      "description": "Jakarta is the capital and largest city of Indonesia, known for its modern skyscrapers, cultural landmarks, and vibrant street life.",
+      "image": "lib/assets/images/jakarta.jpg",
+      "culture": "Betawi",
+      "history": "Colonial heritage",
+      "region": "Jakarta Special Capital Region",
+      "type": "City, Culture",
+      "popularity": 8.0,
+      "highlights": [
+        "National Monument (Monas)",
+        "Istiqlal Mosque",
+        "Taman Mini Indonesia Indah",
+        "Ancol Dreamland",
+        "Old Town (Kota Tua)"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Ubud",
+      "description": "Ubud is a town on the Indonesian island of Bali, known for its traditional crafts and dance. The surrounding Ubud District’s rainforest and terraced rice paddies, dotted with Hindu temples and shrines, are among Bali's most famous landscapes.",
+      "image": "lib/assets/images/ubud.jpg",
+      "culture": "Balinese",
+      "history": "Traditional arts and crafts",
+      "region": "Bali",
+      "type": "Culture, Nature",
+      "popularity": 8.7,
+      "highlights": [
+        "Sacred Monkey Forest Sanctuary",
+        "Tegalalang Rice Terrace",
+        "Ubud Royal Palace",
+        "Campuhan Ridge Walk",
+        "Goa Gajah (Elephant Cave)"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Borobudur Temple",
+      "description": "Borobudur is a 9th-century Mahayana Buddhist temple in Magelang Regency, not far from the town of Muntilan, in Central Java, Indonesia. It is the world's largest Buddhist temple.",
+      "image": "lib/assets/images/borobudur.jpg",
+      "culture": "Buddhist",
+      "history": "Ancient religious site",
+      "region": "Central Java",
+      "type": "Historical, Religious",
+      "popularity": 9.1,
+      "highlights": [
+        "Buddhist Stupas and Reliefs",
+        "Sunrise and Sunset Views",
+        "Pawon and Mendut Temples",
+        "Candi Sewu",
+        "Borobudur Archaeological Museum"
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Mount Bromo",
+      "description": "Mount Bromo, is an active volcano and part of the Tengger massif, in East Java, Indonesia. At 2,329 meters, it is not the highest peak of the massif but is the most well known.",
+      "image": "lib/assets/images/bromo.jpg",
+      "culture": "Tenggerese",
+      "history": "Volcanic eruptions",
+      "region": "East Java",
+      "type": "Nature, Adventure",
+      "popularity": 8.8,
+      "highlights": [
+        "Sunrise Viewpoint",
+        "Savannah Hill",
+        "Teletubbies Hill",
+        "Whispering Sands",
+        "Luhur Poten Temple"
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Gili Islands",
+      "description": "The Gili Islands are an archipelago of three small islands — Gili Trawangan, Gili Air, and Gili Meno — just off the northwest coast of Lombok, Indonesia.",
+      "image": "lib/assets/images/giliIsland.jpg",
+      "culture": "Mixed",
+      "history": "Fishing communities",
+      "region": "West Nusa Tenggara",
+      "type": "Beach, Diving",
+      "popularity": 8.3,
+      "highlights": [
+        "Snorkeling and Diving",
+        "Turtle Sanctuary",
+        "Gili Trawangan Night Market",
+        "Gili Meno Bird Park",
+        "Gili Air Wall"
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Tana Toraja",
+      "description": "Tana Toraja is a regency in the highlands of South Sulawesi, Indonesia. It's known for its unique culture, traditional houses, and elaborate funeral ceremonies.",
+      "image": "lib/assets/images/tanaToraja.jpg",
+      "culture": "Torajan",
+      "history": "Traditional funeral rituals",
+      "region": "South Sulawesi",
+      "type": "Culture, Nature",
+      "popularity": 8.4,
+      "highlights": [
+        "Londa Burial Caves",
+        "Ke'te Kesu Village",
+        "Lemo Cliff Tombs",
+        "Kete Kesu Funeral Ceremony",
+        "Batutumonga"
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Mount Rinjani",
+      "description": "Mount Rinjani is an active volcano in Indonesia on the island of Lombok. It rises to 3,726 meters, making it the second-highest volcano in Indonesia.",
+      "image": "lib/assets/images/rinjani.jpg",
+      "culture": "Sasak",
+      "history": "Volcanic eruptions",
+      "region": "West Nusa Tenggara",
+      "type": "Trekking, Nature",
+      "popularity": 9.0,
+      "highlights": [
+        "Trekking to the Summit",
+        "Segara Anak Lake",
+        "Hot Springs",
+        "Senaru Crater Rim",
+        "Tiu Kelep Waterfall"
+      ]
+    },
+    {
+      "id": 13,
+      "name": "Bunaken",
+      "description": "Bunaken is an island near Manado in Northern Sulawesi, Indonesia. It is part of the Bunaken Marine Park, known for its vibrant coral reefs and diverse marine life.",
+      "image": "lib/assets/images/bunaken.jpg",
+      "culture": "Manadonese",
+      "history": "Marine conservation",
+      "region": "North Sulawesi",
+      "type": "Diving, Nature",
+      "popularity": 8.7,
+      "highlights": [
+        "Diving and Snorkeling",
+        "Siladen Island",
+        "Liang Beach",
+        "Barracuda Point",
+        "Mandolin Point"
+      ]
+    },
+    {
+      "id": 14,
+      "name": "Bandung",
+      "description": "Bandung is the capital of West Java province in Indonesia and a vibrant city known for its art deco buildings, rich culture, and culinary delights.",
+      "image": "lib/assets/images/bandung.jpg",
+      "culture": "Sundanese",
+      "history": "Colonial heritage",
+      "region": "West Java",
+      "type": "City, Shopping",
+      "popularity": 8.1,
+      "highlights": [
+        "Trans Studio Bandung",
+        "Saung Angklung Udjo",
+        "Kawah Putih (White Crater)",
+        "Cihampelas Walk",
+        "Gedung Sate"
+      ]
+    },
+    {
+      "id": 15,
+      "name": "Derawan Islands",
+      "description": "The Derawan Islands are located in the Sulawesi Sea, on the coastal shelf of East Kalimantan, Indonesia. The islands are known for their pristine beaches and excellent diving spots.",
+      "image": "lib/assets/images/derawanIsland.jpg",
+      "culture": "Mixed",
+      "history": "Marine biodiversity",
+      "region": "East Kalimantan",
+      "type": "Diving, Nature",
+      "popularity": 8.9,
+      "highlights": [
+        "Derawan Island",
+        "Maratua Island",
+        "Kakaban Island",
+        "Sangalaki Island",
+        "Jellyfish Lake"
+      ]
+    },
+    {
+      "id": 16,
+      "name": "Mount Ijen",
+      "description": "Mount Ijen is an active stratovolcano in East Java, Indonesia. It's known for its iconic blue fire, the largest acidic crater lake in the world, and sulfur mining activities.",
+      "image": "lib/assets/images/mountIjen.jpg",
+      "culture": "Javanese",
+      "history": "Volcanic activity",
+      "region": "East Java",
+      "type": "Nature, Adventure",
+      "popularity": 8.6,
+      "highlights": [
+        "Blue Fire Phenomenon",
+        "Kawah Ijen Crater",
+        "Sulfur Mines",
+        "Ijen Plateau",
+        "Jagir Waterfall"
+      ]
+    },
+    {
+      "id": 17,
+      "name": "Manado",
+      "description": "Manado is the capital of North Sulawesi province in Indonesia and a gateway to various natural attractions, including the Bunaken Marine Park.",
+      "image": "lib/assets/images/manado.jpg",
+      "culture": "Minahasan",
+      "history": "Colonial heritage",
+      "region": "North Sulawesi",
+      "type": "City, Nature",
+      "popularity": 7.8,
+      "highlights": [
+        "Bunaken Marine Park",
+        "Manado Tua Island",
+        "Tondano Lake",
+        "Christ Blessing Statue",
+        "Waruga Ancient Tombs"
+      ]
+    },
+    {
+      "id": 18,
+      "name": "Nusa Penida",
+      "description": "Nusa Penida is a small island located southeast of Bali, known for its rugged landscapes, stunning cliffs, and beautiful beaches.",
+      "image": "lib/assets/images/nusaPenida.jpg",
+      "culture": "Balinese",
+      "history": "Traditional beliefs",
+      "region": "Bali",
+      "type": "Adventure, Nature",
+      "popularity": 8.4,
+      "highlights": [
+        "Kelingking Beach",
+        "Broken Beach (Pasih Uug)",
+        "Angel's Billabong",
+        "Crystal Bay",
+        "Atuh Beach"
+      ]
+    },
+    {
+      "id": 19,
+      "name": "Banda Islands",
+      "description": "The Banda Islands are a group of ten volcanic islands in the Banda Sea, about 2,000 km east of Java, Indonesia. The islands are known for their history as the legendary Spice Islands.",
+      "image": "lib/assets/images/bandaIsland.jpg",
+      "culture": "Mixed",
+      "history": "Spice trade",
+      "region": "Maluku",
+      "type": "History, Nature",
+      "popularity": 8.3,
+      "highlights": [
+        "Fort Belgica",
+        "Banda Neira",
+        "Hatta Island",
+        "Gunung Api",
+        "Ai Island"
+      ]
+    },
+    {
+      "id": 20,
+      "name": "Sumba",
+      "description": "Sumba is an island in eastern Indonesia, known for its unique traditional villages, impressive megalithic tombs, and beautiful landscapes.",
+      "image": "lib/assets/images/sumba.jpg",
+      "culture": "Sumbanese",
+      "history": "Ancient traditions",
+      "region": "East Nusa Tenggara",
+      "type": "Culture, Nature",
+      "popularity": 8.2,
+      "highlights": [
+        "Waikabubak Village",
+        "Wanukaka Beach",
+        "Tanggedu Waterfall",
+        "Praijing Traditional Village",
+        "Weekuri Lagoon"
+      ]
+    }
+  ]
+}
