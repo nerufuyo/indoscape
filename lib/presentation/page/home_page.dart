@@ -98,7 +98,10 @@ class _HomePageState extends State<HomePage> {
       duration: const Duration(seconds: 2),
       themeMode: ThemeMode.light,
       shimmerGradient: _shimmerGradientCustom(),
-      skeleton: ShimmerMountainCarousel(context: context),
+      skeleton: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: ShimmerMountainCarousel(context: context),
+      ),
       child: FutureBuilder(
         future: Repository().getMountainList(),
         builder: (context, snapshot) {

@@ -1,5 +1,4 @@
 # indoscape
-![Alt text](https://api.codemagic.io/apps/64a20cd4d6ddc2f13e3a8e28/64a20cd4d6ddc2f13e3a8e27/status_badge.svg)
 
 A new Flutter project.
 
