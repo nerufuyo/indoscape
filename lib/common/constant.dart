@@ -7,6 +7,7 @@ import 'package:indoscape/presentation/page/menu/menu_culture_page.dart';
 import 'package:indoscape/presentation/page/menu/menu_food_page.dart';
 import 'package:indoscape/presentation/page/menu/menu_mountain_page.dart';
 import 'package:indoscape/presentation/page/menu/menu_movie_page.dart';
+import 'package:indoscape/presentation/page/menu/menu_travel_page.dart';
 import 'package:indoscape/presentation/page/menu/menu_weather_page.dart';
 
 double kelvinToCelsius(double kelvin) {
@@ -43,7 +44,7 @@ List floatingMenuContentRoute = [
   MenuAboutPage.routeName,
   MenuMountainPage.routeName,
   MenuCulturePage.routeName,
-  MenuAboutPage.routeName,
+  MenuTravelPage.routeName,
   MenuMoviePage.routeName,
   MenuAboutPage.routeName,
   MenuWeatherPage.routeName,

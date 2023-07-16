@@ -35,6 +35,7 @@ flutter:
   uses-material-design: true
   assets:
     - .env
+    - lib/assets/json/travel.json
     - lib/assets/json/culture.json
     - lib/assets/json/food.json
     - lib/assets/json/mountain.json
@@ -112,3 +113,23 @@ flutter:
     - lib/assets/images/rejang.jpg
     - lib/assets/images/joglo.jpg
     - lib/assets/images/lontongCapGomeh.jpg
+    - lib/assets/images/bali.jpg
+    - lib/assets/images/yogyakarta.jpg
+    - lib/assets/images/komodoNationalPark.jpg
+    - lib/assets/images/rajaAmpat.jpg
+    - lib/assets/images/lombok.jpg
+    - lib/assets/images/jakarta.jpg
+    - lib/assets/images/ubud.jpg
+    - lib/assets/images/borobudur.jpg
+    - lib/assets/images/bromo.jpg
+    - lib/assets/images/giliIsland.jpg
+    - lib/assets/images/tanaToraja.jpg
+    - lib/assets/images/rinjani.jpg
+    - lib/assets/images/bunaken.jpg
+    - lib/assets/images/bandung.jpg
+    - lib/assets/images/derawanIsland.jpg
+    - lib/assets/images/mountIjen.jpg
+    - lib/assets/images/manado.jpg
+    - lib/assets/images/nusaPenida.jpg
+    - lib/assets/images/bandaIsland.jpg
+    - lib/assets/images/sumba.jpg

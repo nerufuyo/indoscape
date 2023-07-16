@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:indoscape/presentation/page/detail/culture_detail_page.dart';
 import 'package:indoscape/presentation/page/detail/mountain_detail_page.dart';
+import 'package:indoscape/presentation/page/detail/travel_detail_page.dart';
 import 'package:indoscape/presentation/page/discovery_page.dart';
 import 'package:indoscape/presentation/page/detail/food_detail_page.dart';
 import 'package:indoscape/presentation/page/home_page.dart';
@@ -11,6 +12,7 @@ import 'package:indoscape/presentation/page/menu/menu_culture_page.dart';
 import 'package:indoscape/presentation/page/menu/menu_food_page.dart';
 import 'package:indoscape/presentation/page/menu/menu_mountain_page.dart';
 import 'package:indoscape/presentation/page/menu/menu_movie_page.dart';
+import 'package:indoscape/presentation/page/menu/menu_travel_page.dart';
 import 'package:indoscape/presentation/page/menu/menu_weather_page.dart';
 import 'package:indoscape/presentation/page/movies/category_movie_page.dart';
 import 'package:indoscape/presentation/page/movies/detail_movie_page.dart';
@@ -63,6 +65,9 @@ class MyApp extends StatelessWidget {
           case MenuFoodPage.routeName:
             return MaterialPageRoute(
                 builder: (context) => const MenuFoodPage());
+          case MenuTravelPage.routeName:
+            return MaterialPageRoute(
+                builder: (context) => const MenuTravelPage());
           case CategoryMoviePage.routeName:
             int id = settings.arguments as int;
             return MaterialPageRoute(
@@ -83,6 +88,10 @@ class MyApp extends StatelessWidget {
             int id = settings.arguments as int;
             return MaterialPageRoute(
                 builder: (context) => DetailCulturePage(id: id));
+          case DetailTravelPage.routeName:
+            int id = settings.arguments as int;
+            return MaterialPageRoute(
+                builder: (context) => DetailTravelPage(id: id));
           default:
             return MaterialPageRoute(
                 builder: (context) => const NavigationWidget());

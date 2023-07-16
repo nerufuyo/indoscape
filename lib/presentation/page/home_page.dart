@@ -10,7 +10,9 @@ import 'package:indoscape/data/models/food_model.dart';
 import 'package:indoscape/data/repositories/repository.dart';
 import 'package:indoscape/presentation/page/detail/food_detail_page.dart';
 import 'package:indoscape/presentation/page/detail/mountain_detail_page.dart';
+import 'package:indoscape/presentation/page/detail/travel_detail_page.dart';
 import 'package:indoscape/presentation/page/menu/menu_food_page.dart';
+import 'package:indoscape/presentation/page/menu/menu_travel_page.dart';
 import 'package:indoscape/presentation/widget/shimmer_widget.dart';
 import 'package:skeletons/skeletons.dart';
 
@@ -388,82 +390,124 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  SizedBox _tavelContent(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height / 4,
-      child: ListView.separated(
-        padding: const EdgeInsets.only(left: 16),
-        scrollDirection: Axis.horizontal,
-        separatorBuilder: (BuildContext context, index) =>
-            const HorizontalGap5(),
-        itemCount: 10,
-        itemBuilder: (BuildContext context, index) {
-          return Skeleton(
-            isLoading: isLoading,
-            duration: const Duration(seconds: 2),
-            themeMode: ThemeMode.light,
-            shimmerGradient: _shimmerGradientCustom(),
-            skeleton: const ShimmerTravelWidget(),
-            child: Stack(
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.width / 3,
-                  decoration: BoxDecoration(
-                    color: backgroundColor,
-                    borderRadius: BorderRadius.circular(16),
-                    image: const DecorationImage(
-                      image: AssetImage('lib/assets/images/bromo.jpg'),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                Positioned(
-                  top: 10,
-                  left: 10,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: textColor.withOpacity(.25),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    child: Text(
-                      'Mountain',
-                      style: jakartaCaption.copyWith(
-                        color: backgroundColor,
-                      ),
-                    ),
-                  ),
-                ),
-                Positioned(
-                  bottom: 10,
-                  left: 10,
-                  right: 10,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Icon(
-                        Icons.pin_drop_outlined,
-                        color: backgroundColor,
-                        size: 20,
-                      ),
-                      const HorizontalGap5(),
-                      Flexible(
-                        child: Text(
-                          'Bromo, East Java',
-                          style: jakartaCaption.copyWith(
+  FutureBuilder _tavelContent(BuildContext context) {
+    return FutureBuilder(
+      future: Repository().getTravelList(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          final data = snapshot.data;
+          return SizedBox(
+            height: MediaQuery.of(context).size.height / 4,
+            child: ListView.separated(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              scrollDirection: Axis.horizontal,
+              separatorBuilder: (BuildContext context, index) =>
+                  const HorizontalGap5(),
+              itemCount: 10,
+              itemBuilder: (BuildContext context, index) {
+                final travel = data[index];
+                return Skeleton(
+                  isLoading: isLoading,
+                  duration: const Duration(seconds: 2),
+                  themeMode: ThemeMode.light,
+                  shimmerGradient: _shimmerGradientCustom(),
+                  skeleton: const ShimmerTravelWidget(),
+                  child: InkWell(
+                    onTap: () {
+                       Navigator.pushNamed(
+                        context,
+                        DetailTravelPage.routeName,
+                        arguments: travel.id,
+                      );
+                    },
+                    child: Stack(
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width / 3,
+                          decoration: BoxDecoration(
                             color: backgroundColor,
+                            borderRadius: BorderRadius.circular(16),
+                            image: DecorationImage(
+                              image: AssetImage(travel.image.toString()),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16),
+                              gradient: const LinearGradient(
+                                colors: [
+                                  Colors.transparent,
+                                  textColor,
+                                ],
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                        Positioned(
+                          top: 10,
+                          left: 10,
+                          right: 10,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: textColor.withOpacity(.25),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 4),
+                            child: Text(
+                              travel.type.toString(),
+                              style: jakartaCaption.copyWith(
+                                color: backgroundColor,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 10,
+                          left: 10,
+                          right: 10,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Icon(
+                                Icons.pin_drop_outlined,
+                                color: backgroundColor,
+                                size: 20,
+                              ),
+                              const HorizontalGap5(),
+                              Flexible(
+                                child: Text(
+                                  travel.region.toString(),
+                                  style: jakartaCaption.copyWith(
+                                    color: backgroundColor,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                );
+              },
             ),
           );
-        },
-      ),
+        } else if (snapshot.hasError) {
+          return const Center(
+            child: Text('Error'),
+          );
+        } else {
+          return const Center(
+            child: CircularProgressIndicator(
+              color: primaryColor,
+            ),
+          );
+        }
+      },
     );
   }
 
@@ -474,19 +518,24 @@ class _HomePageState extends State<HomePage> {
         left: 16,
         right: 16,
       ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            'Travel Destination',
-            style: jakartaH3,
-          ),
-          Text(
-            'See All',
-            style: jakartaButton.copyWith(color: primaryColor),
-          )
-        ],
+      child: InkWell(
+        onTap: () {
+          Navigator.pushNamed(context, MenuTravelPage.routeName);
+        },
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Travel Destination',
+              style: jakartaH3,
+            ),
+            Text(
+              'See All',
+              style: jakartaButton.copyWith(color: primaryColor),
+            )
+          ],
+        ),
       ),
     );
   }
