@@ -14,4 +14,5 @@ Indoscape is an innovative mobile application that serves as a virtual gateway t
 
 ## Screenshots
 
+<img src='screenshot/screenshot2.jpg'>
 <img src='screenshot/screenshot.jpg'>
